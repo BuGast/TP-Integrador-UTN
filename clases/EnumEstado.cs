@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TP_Integrador
+namespace TP_Integrador.clases
 {
     internal enum Estado
     {
