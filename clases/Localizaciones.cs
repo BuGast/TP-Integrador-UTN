@@ -1,13 +1,13 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TP_Integrador
+namespace TP_Integrador.clases
 {
-    internal class Cuartel
+    internal class Localizacion
     {
-
+        // Prueba
     }
 }
