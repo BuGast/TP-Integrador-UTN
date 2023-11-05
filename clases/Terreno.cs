@@ -13,6 +13,7 @@ namespace TP_Integrador
         public Terreno(int tamaño)
         {
             terreno = new Localizacion[tamaño, tamaño];
+            InicializarTerrenoAleatoriamente();
             
         }
 
@@ -26,7 +27,7 @@ namespace TP_Integrador
                 for (int j = 0; j < terreno.GetLength(1); j++)
                 {
                     TipoLocalizacion tipo = (TipoLocalizacion)random.Next(Enum.GetValues(typeof(TipoLocalizacion)).Length); //extraigo del enum un valor aleatoriamente
-                    terreno[i, j] = new Localizacion($"Celda ({i}, {j})", tipo); //lo asigno en la matriz
+                    terreno[i, j] = new Localizacion($"Ubicación ({i}, {j})",i,j, tipo); //lo asigno en la matriz,le pongo nombre, guardo las coordenadas y el tipo
                 }
             }
         }
