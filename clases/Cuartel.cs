@@ -10,6 +10,8 @@ namespace TP_Integrador
     internal class Cuartel
     {
         // public Dictionary<string, string[]> listaOperadores = new Dictionary<string, string[]>();
+        Localizacion localizacion = new Localizacion();
+
 
         public List<Operador> operadores = new List<Operador>();
         public List<Localizacion> Localizaciones = new List<Localizacion>();
@@ -35,5 +37,7 @@ namespace TP_Integrador
         {
             operadores.Remove(operador);
         }
+
+        
     }
 }
