@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TP_Integrador
 {
-    internal abstract class Operador
+    public abstract class Operador
     {
         string id;
         Bateria bateria;
@@ -16,42 +16,15 @@ namespace TP_Integrador
         internal Localizacion localizacionBase;
         Localizacion localizacion;
 
-        void Mover()
-        {
-
-        }
-        void VerificarProximidadConOperador() { 
-            
-        }
-
-        void VerificarEstado() { 
-            
-        }
-
-        void ComprobarBateriaActual()
-        {
-
-        }
-        void DisminuirBateriaActual()
-        {
-
-        }
-        void TransferirCargaBateria()
-        {
-
-        }
-        void TransferirCargaFisica()
-        {
-
-        }
-        void VolverAlCuartel()
-        {
-
-        } 
-        void CargarBateria()
-        {
-
-        }
+        public abstract void Mover();
+        public abstract void VerificarProximidadConOperador();
+        public abstract void VerificarEstado();
+        public abstract void ComprobarBateriaActual();
+        public abstract void DisminuirBateriaActual();
+        public abstract void TransferirCargaBateria();
+        public abstract void TransferirCargaFisica();
+        public abstract void VolverAlCuartel();
+        public abstract void CargarBateria();
     }
 
 }
