@@ -13,8 +13,8 @@ namespace TP_Integrador
         string estado;
         int cargaActual;
         int velocidadOptima;
-        internal Localizacion localizacionBase;
-        Localizacion localizacion;
+        Localizacion localizacionBase;
+        Localizacion localizacionActual;
 
         public abstract void Mover();
         public abstract void VerificarProximidadConOperador();
