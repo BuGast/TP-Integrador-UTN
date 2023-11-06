@@ -48,6 +48,11 @@ namespace TP_Integrador
 
         }
         
+        public void EnviarOperadorALocalizacion()
+        {
+
+        }
+
         public void TotalRecall()
         {
 
