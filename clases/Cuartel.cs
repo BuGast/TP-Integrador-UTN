@@ -10,8 +10,8 @@ namespace TP_Integrador
     internal class Cuartel
     {
         // public Dictionary<string, string[]> listaOperadores = new Dictionary<string, string[]>();
-        Localizacion localizacion = new Localizacion();
-
+        //Localizacion localizacion = new Localizacion();
+        
 
         public List<Operador> operadores = new List<Operador>();
         public List<Localizacion> Localizaciones = new List<Localizacion>();
@@ -20,7 +20,7 @@ namespace TP_Integrador
         {
             Cuartel cuartel = new Cuartel();
             int cantidadOperadores = ObtenerCantidadOperadoresActivos(cuartel);
-            Console.WriteLine($"La cantidad de operadores activos es: {cantidadOperadores}");
+            Console.WriteLine($"Cantidad de operadores activados: {cantidadOperadores}");
         }
 
         public int ObtenerCantidadOperadoresActivos(Cuartel cuartel)
@@ -38,6 +38,21 @@ namespace TP_Integrador
             operadores.Remove(operador);
         }
 
+        public void EstadoDelOperador()
+        {
+
+        }
+
+        public void CambiarEstadoOperador()
+        {
+
+        }
         
+        public void TotalRecall()
+        {
+
+        }
+
+
     }
 }
