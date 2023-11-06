@@ -11,7 +11,6 @@ namespace TP_Integrador
         string id;
         Bateria bateria;
         string estado;
-        int cargaActual;
         int velocidadOptima;
         Localizacion localizacionBase;
         Localizacion localizacionActual;

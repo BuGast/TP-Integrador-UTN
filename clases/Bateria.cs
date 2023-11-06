@@ -10,6 +10,7 @@ namespace TP_Integrador
     {
         string id;
         int cargaMaxima;
+        int cargaActual;
 
 
         void recargarBateria()
