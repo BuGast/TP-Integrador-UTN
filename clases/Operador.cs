@@ -12,10 +12,19 @@ namespace TP_Integrador
         Bateria bateria;
         string estado;
         int velocidadOptima;
-        Localizacion localizacionBase;
+        //Localizacion localizacionBase;  //creo que no deberíamos almacenar en cada operador la ubicación del cuartel
         Localizacion localizacionActual;
 
-        public abstract void Mover();
+        public Operador(string id, Bateria bateria,string estado,int velocidadOptima, Localizacion localizacionActual)
+        {
+            this.id = id;
+            this.bateria = bateria;
+            this.estado = estado;
+            this.velocidadOptima = velocidadOptima;
+            this.localizacionActual = localizacionActual;
+        }
+
+        public abstract void Mover(Localizacion ubicacionDeDestino);
         public abstract void VerificarProximidadConOperador();
         public abstract void VerificarEstado();
         public abstract void ComprobarBateriaActual();
