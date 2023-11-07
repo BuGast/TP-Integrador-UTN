@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace TP_Integrador
 {
-    public enum TipoLocalizacion
-    {
-        TerrenoBaldio,
-        Planicie,
-        Bosque,
-        SectorUrbano,
-        Vertedero,
-        Lago,
-        VertederoElectronico,
-        Cuartel,
-        SitioReciclaje
-    }
+    //public enum TipoLocalizacion
+    //{
+    //    TerrenoBaldio,
+    //    Planicie,
+    //    Bosque,
+    //    SectorUrbano,
+    //    Vertedero,
+    //    Lago,
+    //    VertederoElectronico,
+    //    Cuartel,
+    //    SitioReciclaje
+    //}
 }

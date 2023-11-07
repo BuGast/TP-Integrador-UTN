@@ -9,38 +9,51 @@ namespace TP_Integrador
 {
     internal class Cuartel
     {
-        // public Dictionary<string, string[]> listaOperadores = new Dictionary<string, string[]>();
-        //Localizacion localizacion = new Localizacion();
-        
+        Localizacion localizacion = new Localizacion();
+        string[,] mapa;
 
-        public List<Operador> operadores = new List<Operador>();
-        public List<Localizacion> Localizaciones = new List<Localizacion>();
+        int operadoresActivos = 0;
+        int operadoresInactivos = 0;
+
+        public Cuartel()
+        {
+            mapa = localizacion.ObtenerMapa();
+        }
+
+        public void EstablecerCuartel()
+        {
+            localizacion.ActualizarPosicion(0, 0, "Cuartel");
+        }               
 
         public void CantidadOperadoresActivos()
         {
-            Cuartel cuartel = new Cuartel();
-            int cantidadOperadores = ObtenerCantidadOperadoresActivos(cuartel);
-            Console.WriteLine($"Cantidad de operadores activados: {cantidadOperadores}");
+            Console.WriteLine($"Cantidad de operadores activados: {operadoresActivos} operadores");
         }
 
-        public int ObtenerCantidadOperadoresActivos(Cuartel cuartel)
+        public void CantidadOperadoresInactivos()
         {
-            return cuartel.operadores.Count;
+            Console.WriteLine($"Cantidad de operadores en STANDBY: {operadoresInactivos} operadores");
         }
 
-        public void AgregarOperador(Operador operador)
+        public void CantidadDeOperadoresTotales()
         {
-            operadores.Add(operador);
+            int total = operadoresActivos + operadoresInactivos;
+            Console.WriteLine($"Actualmente hay {total} operadores creados.");
         }
 
-        public void EliminarOperador(Operador operador)
+        public void AgregarOperador()
         {
-            operadores.Remove(operador);
+            operadoresActivos++;
+        }
+
+        public void EliminarOperador()
+        {
+            operadoresActivos--;
         }
 
         public void EstadoDelOperador()
         {
-
+            
         }
 
         public void CambiarEstadoOperador()
@@ -57,7 +70,5 @@ namespace TP_Integrador
         {
 
         }
-
-
     }
 }
