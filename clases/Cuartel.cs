@@ -8,12 +8,19 @@ using TP_Integrador.clases;
 namespace TP_Integrador
 {
     internal class Cuartel
-    {
+    {   GeneradorOperadores GeneradorOperadores { get; set; }
         Localizacion localizacion = new Localizacion();
         string[,] mapa;
 
+        int operadoresCreados = 0;
         int operadoresActivos = 0;
         int operadoresInactivos = 0;
+
+        private Dictionary<int, K9> operadoresK9 = new Dictionary<int, K9>();
+        private Dictionary<int, UAV> operadoresUAV = new Dictionary<int, UAV>();
+        private Dictionary<int, M8> operadoresM8 = new Dictionary<int, M8>();
+
+        private GeneradorOperadores generador = new GeneradorOperadores();
 
         public Cuartel()
         {
@@ -23,7 +30,25 @@ namespace TP_Integrador
         public void EstablecerCuartel()
         {
             localizacion.ActualizarPosicion(0, 0, "Cuartel");
-        }               
+        }
+
+        public void CrearModeloK9()
+        {
+            AgregarOperador();
+            GeneradorOperadores.CrearOperadorK9();
+        }
+
+        public void CrearModeloUAV()
+        {
+            AgregarOperador();
+            GeneradorOperadores.CrearOperadorUAV();
+        }
+
+        public void CrearModeloM8()
+        {
+            AgregarOperador();
+            GeneradorOperadores.CrearOperadorM8();
+        }
 
         public void CantidadOperadoresActivos()
         {
@@ -43,7 +68,7 @@ namespace TP_Integrador
 
         public void AgregarOperador()
         {
-            operadoresActivos++;
+            operadoresCreados++;
         }
 
         public void EliminarOperador()

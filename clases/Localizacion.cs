@@ -17,12 +17,9 @@ namespace TP_Integrador
             {
                 for (int j = 0; j < 13; j++)
                 {
-                    mapa[i, j] = "Vacio";
+                    mapa[i, j] = "Terreno Vacio";
                 }
             }
-
-            // El cuartel ocupara siempre la posicion (0, 0) en esta primer parte del programa
-            mapa[0, 0] = "Cuartel";
 
             // usaremos 3 localizaciones de momento, para llegar a la distancia maxima de cada Operador
 
@@ -39,7 +36,7 @@ namespace TP_Integrador
             mapa[localizacion3X, localizacion3Y] = "Localizacion3";
         }
 
-        public void MostrarMapa()
+        public void MostrarMapa() // Metodo para mostrar todas las posiciones generadas y lo que posee
         {
             for (int x = 0; x < mapa.GetLength(0); x++)
             {
