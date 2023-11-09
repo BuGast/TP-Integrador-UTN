@@ -30,7 +30,7 @@ namespace TP_Integrador
         }
 
 
-        //public struct Coordenada
+        //public class Coordenada
         //{
         //    public int X { get; set; }
         //    public int Y { get; set; }
