@@ -17,7 +17,7 @@ namespace TP_Integrador
         public int velocidadOptima { get; set; }
         public int[,] coordActual = new int[13, 13];
 
-        public Operador()
+        public Operador(int[,] coordActual)
         {
             Random randy = new Random();
 
@@ -55,7 +55,7 @@ namespace TP_Integrador
         {
 
         }
-        public abstract void Mover(int[,] coordDeDestino);
+        public abstract void Mover(int[,] coordDeDestino, int[,] coordMapa);
     }
 
 }
