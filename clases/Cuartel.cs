@@ -8,8 +8,10 @@ using static TP_Integrador.clases.GeneradorDeMapa;
 
 namespace TP_Integrador
 {
-    internal class Cuartel
+    public class Cuartel
     {
+
+        List<Operador> operadores = new List<Operador>();
         GeneradorDeMapa generador = new GeneradorDeMapa();
 
         string[,] mapa;
@@ -29,125 +31,101 @@ namespace TP_Integrador
             generador.CrearMapaVacio();
             generador.ActualizarPosicion(generador.coordenadasUbicaciones[Ubicaciones.Cuartel].x, generador.coordenadasUbicaciones[Ubicaciones.Cuartel].y, "Cuartel");
         }
-
-
-        private void AsignarOperador<T>(Dictionary<int, T> diccionarioOperadores, T nuevoOperador) where T : Operador
+        public void CrearOperador()
         {
-            diccionarioOperadores.Add(id, nuevoOperador);
-            id++; // Incrementar el ID después de la asignación
-        }
 
-        public K9 CrearOperadorK9()
-        {
-            K9 nuevoOperadorK9 = new K9();
-            AsignarOperador(operadoresK9, nuevoOperadorK9);
-            operadoresCreados++;
-            operadoresActivos++;
-            return nuevoOperadorK9;
-        }
+            Console.WriteLine("¿Que tipo de operador quiere crear?");
+            Console.WriteLine("1: para UAV");
+            Console.WriteLine("2: para K9");
+            Console.WriteLine("3: para M8");
+            int seleccionUsuario = Convert.ToInt16(Console.ReadLine());
+            Console.WriteLine("ingrese la cantidad de operadores a crear");
+            int cantOperadores = Convert.ToInt16(Console.ReadLine());
 
-        public UAV CrearOperadorUAV()
-        {
-            UAV nuevoOperadorUAV = new UAV();
-            AsignarOperador(operadoresUAV, nuevoOperadorUAV);
-            operadoresCreados++;
-            operadoresActivos++;
-            return nuevoOperadorUAV;
-        }
+            for (int i = 1; i <= cantOperadores; i++)
+            {
 
-        public M8 CrearOperadorM8()
-        {
-            M8 nuevoOperadorM8 = new M8();
-            AsignarOperador(operadoresM8, nuevoOperadorM8);
-            operadoresCreados++;
-            operadoresActivos++;
-            return nuevoOperadorM8;
+                if (seleccionUsuario == 1)
+                {
+                    Operador operador = new UAV();
+                    operador.id = i.ToString();
+                    operadores.Add(operador);
+                }
+                else if (seleccionUsuario == 1)
+                {
+                    Operador operador = new K9();
+                    operador.id = i.ToString();
+                    operadores.Add(operador);
+                }
+                else if (seleccionUsuario == 2)
+                {
+                    Operador operador = new M8();
+                    operador.id = i.ToString();
+                    operadores.Add(operador);
+                }
+                else
+                {
+                    Console.WriteLine("opcion incorrecta");
+                }
+            }
+            foreach (var operador in operadores)
+            {
+                MostrarDetallesOperador(operador);
+            }
         }
 
         public void MostrarDetallesOperador(Operador operador)
         {
-            Console.WriteLine($"ID: {operador.ID}");
-            Console.WriteLine($"Estado: {operador.Estado}");
-            Console.WriteLine($"Batería: {operador.Bateria} mAh");
+            Console.WriteLine(operador.GetType().Name);
+            Console.WriteLine("id: " + operador.id);
+            Console.WriteLine("estado: " + operador.estado);
+            Console.WriteLine("cargaMaxima: " + operador.cargaMaxima + " kg");
+            Console.WriteLine("velocidad optima: " + operador.velocidadOptima);
+            Console.WriteLine("");
+            Console.WriteLine("BATERIA");
+            Console.WriteLine("carga maxima: " + operador.bateria.MostrarCargaMaxima() + " mAh");
+            Console.WriteLine("carga actual: " + operador.bateria.MostrarCargaActual() + " mAh");
+            Console.WriteLine("------------------------------------------------------");
 
-            // Aca estoy teniendo un problema, cuando lo vean si pueden ayudarme, joya, no puedo acceder a estos atributos del operador creado.
         }
 
-        public void MostrarOperadoresK9()
-        {
-            foreach (var operador in operadoresK9)
-            {
-                Console.WriteLine($"ID: {operador.Key}");
-                MostrarDetallesOperador(operador.Value);
-            }
-        }
-
-        public void MostrarOperadoresUAV()
-        {
-            foreach (var operador in operadoresUAV)
-            {
-                Console.WriteLine($"ID: {operador.Key}");
-                MostrarDetallesOperador(operador.Value);
-            }
-        }
-
-        public void MostrarOperadoresM8()
-        {
-            foreach (var operador in operadoresM8)
-            {
-                Console.WriteLine($"ID: {operador.Key}");
-                MostrarDetallesOperador(operador.Value);
-            }
-        }
-
-        public void MostrarTodosLosOperadores() // Opcion para mostrar todos los diccionarios
-        {
-            MostrarOperadoresK9();
-            MostrarOperadoresUAV();
-            MostrarOperadoresM8();
-        }
-
-        
 
         public void CantidadOperadoresActivos()
         {
-            Console.WriteLine($"Cantidad de operadores activos: {operadoresActivos} operadores");
+/*            Console.WriteLine($"Cantidad de operadores activos: {operadoresActivos} operadores");*/
         }
 
         public void CantidadOperadoresInactivos()
         {
-            Console.WriteLine($"Cantidad de operadores en STANDBY: {operadoresInactivos} operadores");
+/*            Console.WriteLine($"Cantidad de operadores en STANDBY: {operadoresInactivos} operadores");*/
         }
 
         public void CantidadDeOperadoresTotales()
         {
-            int total = operadoresActivos + operadoresInactivos;
-            Console.WriteLine($"Actualmente hay {total} operadores en servicio.");
+/*            int total = operadoresActivos + operadoresInactivos;
+            Console.WriteLine($"Actualmente hay {total} operadores en servicio.");*/
         }
 
         public void AgregarOperador()
         {
-            operadoresCreados++;
+/*            operadoresCreados++;*/
         }
 
         public void EliminarOperador()
         {
-            operadoresActivos--;
+/*            operadoresActivos--;*/
         }
 
         public void CambiarEstadoOperador()
         {
-
         }
 
         public void EnviarOperadorALocalizacion()
         {
-
         }
 
         public void TotalRecall()
         {
-
         }
     }
 }
