@@ -25,8 +25,22 @@ namespace TP_Integrador
             this.cargaMaxima = 0;
             this.cargaActual = 0;
             this.velocidadOptima = 1;
-            this.coordActual= new int[13, 13];
+            this.coordActual= new int[1, 1];   
+            //this.coordActual= Coordenada[0,0];
         }
+
+
+        //public struct Coordenada
+        //{
+        //    public int X { get; set; }
+        //    public int Y { get; set; }
+
+        //    public Coordenada(int x, int y)
+        //    {
+        //        X = x;
+        //        Y = y;
+        //    }
+        //}
         public void ComprobarBateriaActual()
         {
             Console.WriteLine("carga maxima: " + bateria.MostrarCargaMaxima());
