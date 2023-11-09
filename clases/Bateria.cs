@@ -9,8 +9,8 @@ namespace TP_Integrador
     public class Bateria
     {
 
-        protected int cargaMaxima;
-        protected int cargaActual;
+        private int cargaMaxima;
+        private int cargaActual;
 
         public void CargarCargaMaxima(int cargaM)
         {
