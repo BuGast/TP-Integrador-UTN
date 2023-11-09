@@ -15,9 +15,9 @@ namespace TP_Integrador
         public int cargaMaxima { get; set; }
         public int cargaActual { get; set; }
         public int velocidadOptima { get; set; }
-        public int[,] coordActual = new int[13, 13];
+        public int[,] coordActual { get; set; }
 
-        public Operador(int[,] coordActual)
+        public Operador()
         {
             Random randy = new Random();
 
@@ -27,7 +27,7 @@ namespace TP_Integrador
             this.cargaMaxima = 0;
             this.cargaActual = 0;
             this.velocidadOptima = 1;
-            this.coordActual=coordActual;
+            this.coordActual= new int[13, 13];
         }
         public void ComprobarBateriaActual()
         {

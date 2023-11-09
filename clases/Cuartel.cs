@@ -51,13 +51,13 @@ namespace TP_Integrador
                     operador.id = i.ToString();
                     operadores.Add(operador);
                 }
-                else if (seleccionUsuario == 1)
+                else if (seleccionUsuario == 2)
                 {
                     Operador operador = new K9();
                     operador.id = i.ToString();
                     operadores.Add(operador);
                 }
-                else if (seleccionUsuario == 2)
+                else if (seleccionUsuario == 3)
                 {
                     Operador operador = new M8();
                     operador.id = i.ToString();
@@ -81,11 +81,12 @@ namespace TP_Integrador
             Console.WriteLine("estado: " + operador.estado);
             Console.WriteLine("cargaMaxima: " + operador.cargaMaxima + " kg");
             Console.WriteLine("velocidad optima: " + operador.velocidadOptima);
+            Console.WriteLine("coordenada actual: " + operador.coordActual[0, 0]);
             Console.WriteLine("");
             Console.WriteLine("BATERIA");
             Console.WriteLine("carga maxima: " + operador.bateria.MostrarCargaMaxima() + " mAh");
             Console.WriteLine("carga actual: " + operador.bateria.MostrarCargaActual() + " mAh");
-            Console.WriteLine("------------------------------------------------------");
+            Console.WriteLine("---------------------------------------------------------");
 
         }
 

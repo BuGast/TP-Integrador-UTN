@@ -49,7 +49,7 @@ namespace TP_Integrador
                     }
 
                     // Actualizo la coordenada actual del operador
-                    coordActual[xActual, yActual];
+/*                    coordActual[xActual, yActual];*/
                     // Aquí podría poner luego una función que analice el terreno en el que está y en base a eso ejecute alguna funcionalidad (tp2)
                 }
             }
