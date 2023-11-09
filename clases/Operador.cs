@@ -41,10 +41,19 @@ namespace TP_Integrador
         }
         public void TransferirCargaFisica(Operador operador1, Operador operador2, int carga)
         {
+            if (operador2.cargaMaxima >= operador1.cargaMaxima) 
+            {
+                operador2.cargaActual = operador1.cargaActual;
+                operador1.cargaActual = 0;
+            }
+            else
+            {
+                Console.WriteLine("error el operador no puede levantar la carga");
+            }
         }
-        public void CargarBateria()
+        public void CargarBateria(Operador operador)
         {
-
+            operador.bateria.RecargarBateria((bateria.MostrarCargaMaxima() - bateria.MostrarCargaActual()));
         }
 
         public void VerificarProximidadConOperador()
