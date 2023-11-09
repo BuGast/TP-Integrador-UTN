@@ -8,7 +8,7 @@ namespace TP_Integrador
 {
     internal class UAV : Operador
     {
-        public OperadorUAV(string id, Bateria bateria, string estado, int velocidadOptima, int[,] coordActual)
+        public UAV(string id, Bateria bateria, string estado, int velocidadOptima, int[,] coordActual)
             : base(id, bateria, estado, velocidadOptima, coordActual)
         {
         }
@@ -46,7 +46,7 @@ namespace TP_Integrador
 
                     // Actualizo la coordenada actual del operador
                     coordActual[xActual, yActual];
-                    // Aquí podría poner luego una función que analice el terreno en el que está y en base a eso ejecute alguna funcionalidad
+                    // Aquí podría poner luego una función que analice el terreno en el que está y en base a eso ejecute alguna funcionalidad (tp2)
                 }
             }
             else
