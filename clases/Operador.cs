@@ -32,7 +32,7 @@ namespace TP_Integrador
         public void DisminuirBateriaActual();
         public void TransferirCargaBateria();
         public void TransferirCargaFisica();
-        public abstract void VolverAlCuartel();
+        //public abstract void VolverAlCuartel(); este no haría falta porque al método mover solo habría que pasarle desde el cuartel las coord del cuartel
         public void CargarBateria();
     }
 

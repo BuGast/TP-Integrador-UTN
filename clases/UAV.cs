@@ -21,8 +21,8 @@ namespace TP_Integrador
             int yDestino = coordDeDestino.GetLength(1);
 
             // Verifico si la coordenada de destino es válida en relación con la posición actual del operador
-            if (xDestino >= 0 && xDestino < coordMapa.GetLength(0) && //me fijo que xDestino sea >=0 y que sea < que el valor máximo de la coord en X del mapa
-                yDestino >= 0 && yDestino < coordMapa.GetLength(1))
+            if (xDestino >= 0 && xDestino <= coordMapa.GetLength(0) && //me fijo que xDestino sea >=0 y que sea < que el valor máximo de la coord en X del mapa
+                yDestino >= 0 && yDestino <= coordMapa.GetLength(1))
             {
                 while (xActual != xDestino || yActual != yDestino)
                 {
@@ -55,10 +55,6 @@ namespace TP_Integrador
             }
         }
 
-
-        public override void VolverAlCuartel()
-        {
-        }
 
     }
 }
