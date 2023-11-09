@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace TP_Integrador
 {
-    internal class K9 : Operador
+    public class K9 : Operador
     {
-        public K9(string id, Bateria bateria, string estado, int velocidadOptima, int[,] coordActual)
-            : base(id, bateria, estado, velocidadOptima, coordActual)
+        public K9()
+            : base()
         {
+            bateria.CargarCargaMaxima(6500);
+            cargaMaxima = 40;
         }
 
         public override void Mover(int[,] coordDeDestino, int[,] coordMapa)

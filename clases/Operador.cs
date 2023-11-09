@@ -8,32 +8,54 @@ namespace TP_Integrador
 {
     public abstract class Operador
     {
-        protected string id;
-        protected Bateria bateria;
-        protected string estado;
-        protected int velocidadOptima;
-        protected int[,] coordActual = new int[13, 13];
-        //Localizacion localizacionBase;  //creo que no deberíamos almacenar en cada operador la ubicación del cuartel
-        //Localizacion localizacionActual;
 
-        public Operador(string id, Bateria bateria,string estado,int velocidadOptima, int[,] coordActual)
+        public string id { get; set; }
+        public Bateria bateria { get; set; }
+        public string estado { get; set; }
+        public int cargaMaxima { get; set; }
+        public int cargaActual { get; set; }
+        public int velocidadOptima { get; set; }
+        public int[,] coordActual = new int[13, 13];
+
+        public Operador()
         {
-            this.id = id;
-            this.bateria = bateria;
-            this.estado = estado;
-            this.velocidadOptima = velocidadOptima;
+            Random randy = new Random();
+
+            this.id = "0";
+            this.bateria = new Bateria();
+            this.estado = "enEspera";
+            this.cargaMaxima = 0;
+            this.cargaActual = 0;
+            this.velocidadOptima = 1;
             this.coordActual=coordActual;
         }
+        public void ComprobarBateriaActual()
+        {
+            Console.WriteLine("carga maxima: " + bateria.MostrarCargaMaxima());
+            Console.WriteLine("carga actual: " + bateria.MostrarCargaActual());
+        }
+        public void TransferirCargaBateria(Operador operador1, Operador operador2, int carga)
+        {
+            operador1.bateria.DescargarBateria(carga);
+            operador2.bateria.RecargarBateria(carga);
+        }
+        public void TransferirCargaFisica(Operador operador1, Operador operador2, int carga)
+        {
+        }
+        public void CargarBateria()
+        {
 
+        }
+
+        public void VerificarProximidadConOperador()
+        {
+
+        }
+        public void VerificarEstado()
+        {
+
+        }
         public abstract void Mover(int[,] coordDeDestino);
-        public void VerificarProximidadConOperador();
-        public void VerificarEstado();
-        public void ComprobarBateriaActual();
-        public void DisminuirBateriaActual();
-        public void TransferirCargaBateria();
-        public void TransferirCargaFisica();
-        //public abstract void VolverAlCuartel(); este no haría falta porque al método mover solo habría que pasarle desde el cuartel las coord del cuartel
-        public void CargarBateria();
     }
 
 }

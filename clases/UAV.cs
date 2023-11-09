@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TP_Integrador
 {
-    internal class UAV : Operador
+    public class UAV : Operador
     {
-        public UAV(string id, Bateria bateria, string estado, int velocidadOptima, int[,] coordActual)
-            : base(id, bateria, estado, velocidadOptima, coordActual)
+        public UAV()
+            : base()
         {
+            bateria.CargarCargaMaxima(4000);
+            cargaMaxima = 5;
+
         }
 
         public override void Mover(int[,] coordDeDestino, int[,]coordMapa)
@@ -54,7 +58,5 @@ namespace TP_Integrador
                 Console.WriteLine("La coordenada de destino no es válida");
             }
         }
-
-
     }
 }

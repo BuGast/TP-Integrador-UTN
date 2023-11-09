@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace TP_Integrador
 {
-    internal class M8 : Operador
+    public class M8 : Operador
     {
-        public M8(string id, Bateria bateria, string estado, int velocidadOptima, int[,] coordActual)
-            : base(id, bateria, estado, velocidadOptima, coordActual)
+        public M8()
+            : base()
         {
+            bateria.CargarCargaMaxima(12250);
+            cargaMaxima = 250;
         }
 
         public override void Mover(int[,] coordDeDestino, int[,] coordMapa)
