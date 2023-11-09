@@ -3,40 +3,56 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TP_Integrador;
 
-namespace TP_Integrador
+namespace TP_Integrador.clases
 {
-    public class Localizacion
+    internal class GeneradorDeMapa
     {
-        string[,] mapa = new string[13, 13];
+        public enum Ubicaciones
+        {
+
+            Cuartel,
+            TerrenoVacio,
+            Localizacion1,
+            Localizacion2,
+            Localizacion3
+        }
+
+        public Dictionary<Ubicaciones, (int x, int y)> coordenadasUbicaciones = new Dictionary<Ubicaciones, (int x, int y)>
+        {
+            { Ubicaciones.Cuartel, (0, 0) },
+            { Ubicaciones.Localizacion1, (40, 40) },
+            { Ubicaciones.Localizacion2, (65, 50) },
+            { Ubicaciones.Localizacion3, (122, 120) }
+            // Se pueden añadir mas coordenadas eventualmente
+        };
+
+        public (int x, int y) ObtenerCoordenadasDeUbicacion(Ubicaciones listaUbicaciones)
+        {
+            if (coordenadasUbicaciones.ContainsKey(listaUbicaciones))
+            {
+                return coordenadasUbicaciones[listaUbicaciones];
+            }
+            return (-1, -1);
+        }
+
+
+        string[,] mapa = new string[130, 130];
 
         public void CrearMapaVacio()
         {
-            for (int i = 0; i < 13; i++)
+            for (int x = 0; x < mapa.GetLength(0); x++)
             {
-                for (int j = 0; j < 13; j++)
+                for (int y = 0; y < mapa.GetLength(1); y++)
                 {
-                    mapa[i, j] = "Terreno Vacio";
+                    mapa[x, y] = Ubicaciones.TerrenoVacio.ToString(); // Establecer inicialmente todo como TerrenoVacio
                 }
             }
 
-            // usaremos 3 localizaciones de momento, para llegar a la distancia maxima de cada Operador
 
-            int localizacion1X = 4; // Aproximadamente 4000m / 100m = 40 - Mas o menos, puede modificarse porque todavia esta en fase de prueba y error
-            int localizacion1Y = 4;
-            mapa[localizacion1X, localizacion1Y] = "Localizacion1";
-
-            int localizacion2X = 6; // Aproximadamente 6500m / 100m = 65 - Igual que arriba
-            int localizacion2Y = 5;
-            mapa[localizacion2X, localizacion2Y] = "Localizacion2";
-
-            int localizacion3X = 12; // Aproximadamente 12250m / 100m = 122.5 - Distancia maxima en este caso
-            int localizacion3Y = 12;
-            mapa[localizacion3X, localizacion3Y] = "Localizacion3";
         }
 
-        public void MostrarMapa() // Metodo para mostrar todas las posiciones generadas y lo que posee
+        internal void MostrarMapa() // Metodo para mostrar todas las posiciones generadas y lo que posee
         {
             for (int x = 0; x < mapa.GetLength(0); x++)
             {
@@ -47,12 +63,22 @@ namespace TP_Integrador
             }
         }
 
+        public int CalcularDistancia(int x1, int y1, int x2, int y2)
+        {
+            int distanciaX = Math.Abs(x2 - x1); // Diferencia en unidades en el eje X
+            int distanciaY = Math.Abs(y2 - y1); // Diferencia en unidades en el eje Y
+
+            int distanciaTotal = (distanciaX + distanciaY) * 100; // Cada unidad representa 100 metros
+
+            return distanciaTotal; // Devuelve la distancia en metros
+        }
+
         public string[,] ObtenerMapa()
         {
             return mapa; // Probando para poder acceder a la matriz desde otra clase
         }
 
-        public void ActualizarPosicion(int x, int y, string nuevoValor)
+        public void ActualizarPosicion(int x, int y, string nuevoValor) // Metodo para Actualizar una posicion en especifico, podria ser de utilidad para el TP2
         {
             if (x >= 0 && x < mapa.GetLength(0) && y >= 0 && y < mapa.GetLength(1))
             {
@@ -122,17 +148,3 @@ namespace TP_Integrador
         }
     }
 }
-
-//public string nombreLocalizacion { get; }
-//public int coordenadaX { get; }
-//public int coordenadaY { get; }
-//public TipoLocalizacion tipoLocalizacion { get; }
-
-
-//public Localizacion(string nombre, int coordX, int coordY, TipoLocalizacion tipo)
-//{
-//    nombreLocalizacion = nombre;
-//    coordenadaX = coordX;
-//    coordenadaY = coordY;
-//    tipoLocalizacion = tipo;
-//}
