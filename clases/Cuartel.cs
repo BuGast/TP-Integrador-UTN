@@ -50,18 +50,24 @@ namespace TP_Integrador
                     Operador operador = new UAV();
                     operador.id = i.ToString();
                     operadores.Add(operador);
+                    operadoresCreados++;
+                    id++;
                 }
                 else if (seleccionUsuario == 2)
                 {
                     Operador operador = new K9();
                     operador.id = i.ToString();
                     operadores.Add(operador);
+                    operadoresCreados++;
+                    id++;
                 }
                 else if (seleccionUsuario == 3)
                 {
                     Operador operador = new M8();
                     operador.id = i.ToString();
                     operadores.Add(operador);
+                    operadoresCreados++;
+                    id++;
                 }
                 else
                 {
@@ -71,6 +77,61 @@ namespace TP_Integrador
             foreach (var operador in operadores)
             {
                 MostrarDetallesOperador(operador);
+            }
+        }
+
+        public void EliminarOperador()
+        {
+            Console.WriteLine("¿Qué tipo de operador desea eliminar?");
+            Console.WriteLine("1: para UAV");
+            Console.WriteLine("2: para K9");
+            Console.WriteLine("3: para M8");
+            int seleccionUsuario = Convert.ToInt16(Console.ReadLine());
+
+            Console.WriteLine("Ingrese el ID del operador a eliminar: ");
+            string idAEliminar = Console.ReadLine();
+
+            switch (seleccionUsuario)
+            {
+                case 1:
+                    EliminarOperadorTipo(idAEliminar, typeof(UAV));
+                    break;
+                case 2:
+                    EliminarOperadorTipo(idAEliminar, typeof(K9));
+                    break;
+                case 3:
+                    EliminarOperadorTipo(idAEliminar, typeof(M8));
+                    break;
+                default:
+                    Console.WriteLine("Opción incorrecta.");
+                    break;
+            }
+        }
+
+        public void EliminarOperadorTipo(string idAEliminar, Type tipoOperador)
+        {
+            // Utilice una expresion Lambda, pero no tengo mucha practica con ella y no se si su funcionalidad esta bien implementada, necesita verificacion
+            var operadorAEliminar = operadores.FirstOrDefault(operador => operador.id == idAEliminar && operador.GetType() == tipoOperador);
+
+            if (operadorAEliminar != null)
+            {
+                operadores.Remove(operadorAEliminar);
+
+                // Reducir el ID y reorganizar los ID restantes
+                foreach (var operador in operadores)
+                {
+                    if (int.Parse(operador.id) > int.Parse(idAEliminar))
+                    {
+                        int nuevoID = int.Parse(operador.id) - 1;
+                        operador.id = nuevoID.ToString();
+                    }
+                }
+
+                Console.WriteLine($"Operador {tipoOperador.Name} con ID {idAEliminar} eliminado con éxito.");
+            }
+            else
+            {
+                Console.WriteLine($"No se encontró ningún operador {tipoOperador.Name} con ese ID.");
             }
         }
 
@@ -114,18 +175,9 @@ namespace TP_Integrador
             Console.WriteLine($"Actualmente hay {total} operadores en servicio.");*/
         }
 
-        public void AgregarOperador()
-        {
-/*            operadoresCreados++;*/
-        }
-
-        public void EliminarOperador()
-        {
-/*            operadoresActivos--;*/
-        }
-
         public void CambiarEstadoOperador()
         {
+
         }
 
         public void EnviarOperadorALocalizacion()
