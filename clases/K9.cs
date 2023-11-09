@@ -3,16 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TP_Integrador.clases;
 
 namespace TP_Integrador
 {
     public class K9 : Operador
     {
+        BateriaOperadores valorBateria;
+        CargaFisicaOperadores valorCargaFisica;
         public K9()
             : base()
         {
-            bateria.CargarCargaMaxima(6500);
-            cargaMaxima = 40;
+            if (Enum.TryParse(BateriaOperadores.K9.ToString(), out valorBateria))
+            {
+                bateria.CargarCargaMaxima(Convert.ToInt32(valorBateria));
+            }
+            if (Enum.TryParse(CargaFisicaOperadores.K9.ToString(), out valorCargaFisica))
+            {
+                cargaMaxima = Convert.ToInt32(valorCargaFisica);
+            }
         }
 
         public override void Mover(int[,] coordDeDestino, int[,] coordMapa)

@@ -19,11 +19,9 @@ namespace TP_Integrador
 
         public Operador()
         {
-            Random randy = new Random();
-
             this.id = "0";
             this.bateria = new Bateria();
-            this.estado = "enEspera";
+            this.estado = Estado.EnEspera.ToString();
             this.cargaMaxima = 0;
             this.cargaActual = 0;
             this.velocidadOptima = 1;

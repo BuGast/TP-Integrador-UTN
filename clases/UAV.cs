@@ -4,16 +4,26 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using TP_Integrador.clases;
 
 namespace TP_Integrador
 {
     public class UAV : Operador
     {
+        BateriaOperadores valorBateria;
+        CargaFisicaOperadores valorCargaFisica;
+
         public UAV()
             : base()
         {
-            bateria.CargarCargaMaxima(4000);
-            cargaMaxima = 5;
+            if (Enum.TryParse(BateriaOperadores.UAV.ToString(), out valorBateria))
+            {
+                bateria.CargarCargaMaxima(Convert.ToInt32(valorBateria));
+            }
+            if (Enum.TryParse(CargaFisicaOperadores.UAV.ToString(), out valorCargaFisica))
+            {
+                cargaMaxima = Convert.ToInt32(valorCargaFisica);
+            }
 
         }
 
