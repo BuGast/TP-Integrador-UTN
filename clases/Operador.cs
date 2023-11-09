@@ -53,7 +53,7 @@ namespace TP_Integrador
         }
         public void VerificarEstado()
         {
-
+            //este método se fija si está en espera, disponible, etc
         }
         public abstract void Mover(int[,] coordDeDestino, int[,] coordMapa);
     }
