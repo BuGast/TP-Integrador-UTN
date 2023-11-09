@@ -39,7 +39,7 @@ namespace TP_Integrador
             Console.WriteLine("2: para K9");
             Console.WriteLine("3: para M8");
             int seleccionUsuario = Convert.ToInt16(Console.ReadLine());
-            Console.WriteLine("ingrese la cantidad de operadores a crear");
+            Console.WriteLine("Ingrese la cantidad de operadores a crear: ");
             int cantOperadores = Convert.ToInt16(Console.ReadLine());
 
             for (int i = 1; i <= cantOperadores; i++)
@@ -90,6 +90,13 @@ namespace TP_Integrador
 
         }
 
+        public void MostrarDetallesOperadoresCreados()
+        {
+            foreach (var operador in operadores)
+            {
+                MostrarDetallesOperador(operador);
+            }
+        }
 
         public void CantidadOperadoresActivos()
         {
@@ -123,10 +130,19 @@ namespace TP_Integrador
 
         public void EnviarOperadorALocalizacion()
         {
+
         }
 
         public void TotalRecall()
         {
+            // Aqui deberia poder acceder a las coordenadas del cuartel
+            var coordenadasCuartel = generador.coordenadasUbicaciones[Ubicaciones.Cuartel];
+
+            // Y con un foreach itero en todos los operadores, y actualizo su coordenada actual por las coordenadas del cuartel
+            foreach (var operador in operadores)
+            {
+                operador.CambiarPosicionACuartel(coordenadasCuartel);
+            }
         }
     }
 }

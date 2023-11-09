@@ -62,6 +62,11 @@ namespace TP_Integrador
         {
             //este método se fija si está en espera, disponible, etc
         }
+        public void CambiarPosicionACuartel((int x, int y) coordenadasCuartel)
+        {
+            this.coordActual = new int[,] { { coordenadasCuartel.x, coordenadasCuartel.y } };
+        }
+
         public abstract void Mover(int[,] coordDeDestino, int[,] coordMapa);
     }
 

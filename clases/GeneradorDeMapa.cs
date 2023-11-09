@@ -48,8 +48,6 @@ namespace TP_Integrador.clases
                     mapa[x, y] = Ubicaciones.TerrenoVacio.ToString(); // Establecer inicialmente todo como TerrenoVacio
                 }
             }
-
-
         }
 
         internal void MostrarMapa() // Metodo para mostrar todas las posiciones generadas y lo que posee
