@@ -8,11 +8,11 @@ namespace TP_Integrador
 {
     public abstract class Operador
     {
-        string id;
-        Bateria bateria;
-        string estado;
-        int velocidadOptima;
-        int[,] coordActual = new int[13, 13];
+        protected string id;
+        protected Bateria bateria;
+        protected string estado;
+        protected int velocidadOptima;
+        protected int[,] coordActual = new int[13, 13];
         //Localizacion localizacionBase;  //creo que no deberíamos almacenar en cada operador la ubicación del cuartel
         //Localizacion localizacionActual;
 
