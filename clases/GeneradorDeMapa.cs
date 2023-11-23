@@ -3,45 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-
-// 
-
+using static TP_Integrador.clases.GeneradorDeMapa;
 
 namespace TP_Integrador.clases
 {
-    internal class GeneradorDeMapa
+    public class GeneradorDeMapa
     {
-        public enum Ubicaciones
-        {
+        private GeneradorDeLocalizaciones generadorLocalizaciones = new GeneradorDeLocalizaciones();
 
-            Cuartel,
-            TerrenoVacio,
-            Localizacion1,
-            Localizacion2,
-            Localizacion3
-        }
-
-        public Dictionary<Ubicaciones, (int x, int y)> coordenadasUbicaciones = new Dictionary<Ubicaciones, (int x, int y)>
-        {
-            { Ubicaciones.Cuartel, (0, 0) },
-            { Ubicaciones.Localizacion1, (40, 40) },
-            { Ubicaciones.Localizacion2, (65, 50) },
-            { Ubicaciones.Localizacion3, (122, 120) }
-            // Se pueden añadir mas coordenadas eventualmente
-        };
-
-        public (int x, int y) ObtenerCoordenadasDeUbicacion(Ubicaciones listaUbicaciones)
-        {
-            if (coordenadasUbicaciones.ContainsKey(listaUbicaciones))
-            {
-                return coordenadasUbicaciones[listaUbicaciones];
-            }
-            return (-1, -1);
-        }
-
-
-        string[,] mapa = new string[130, 130];
+        TipoLocalizaciones.TipoLocalizacion[,] mapa = new TipoLocalizaciones.TipoLocalizacion[20, 20]; // Matriz Hardcodeada segun el tp integrador 2
 
         public void CrearMapaVacio()
         {
@@ -49,10 +19,34 @@ namespace TP_Integrador.clases
             {
                 for (int y = 0; y < mapa.GetLength(1); y++)
                 {
-                    mapa[x, y] = Ubicaciones.TerrenoVacio.ToString(); // Establecer inicialmente todo como TerrenoVacio
+                    TipoLocalizaciones.TipoLocalizacion localizacion = generadorLocalizaciones.LocalizacionAleatoria();
+                    if (localizacion == TipoLocalizaciones.TipoLocalizacion.Cuartel)
+                    {
+                        mapa[x, y] = generadorLocalizaciones.LocalizacionAleatoria();
+                    }
                 }
             }
         }
+
+        //private void ColocarCuartelEquidistante(int x, int y)
+        //{
+        //    // Obtener el número actual de cuarteles generados
+        //    int cuartelesGenerados = generadorLocalizaciones.ObtenerCantidadTerrenoGenerado(TipoLocalizaciones.TipoLocalizacion.Cuartel);
+
+        //    // Verificar si se ha alcanzado el límite de cuarteles
+        //    if (cuartelesGenerados < 3)
+        //    {
+        //        // Calcular la distancia mínima equilibrada entre cuarteles (ajusta según tus necesidades)
+        //        int distanciaMinima = mapa.GetLength(0) / 3; // Divide el mapa en 3 secciones
+
+        //        // Verificar si la posición actual cumple con la distancia mínima
+        //        if (x % distanciaMinima == 0 && y % distanciaMinima == 0)
+        //        {
+        //            // Colocar el cuartel en la posición
+        //            mapa[x, y] = TipoLocalizaciones.TipoLocalizacion.Cuartel;
+        //        }
+        //    }
+        //}
 
         internal void MostrarMapa() // Metodo para mostrar todas las posiciones generadas y lo que posee
         {
@@ -75,21 +69,9 @@ namespace TP_Integrador.clases
             return distanciaTotal; // Devuelve la distancia en metros
         }
 
-        public string[,] ObtenerMapa()
+        public TipoLocalizaciones.TipoLocalizacion[,] ObtenerMapa()
         {
-            return mapa; // Probando para poder acceder a la matriz desde otra clase
-        }
-
-        public void ActualizarPosicion(int x, int y, string nuevoValor) // Metodo para Actualizar una posicion en especifico, podria ser de utilidad para el TP2
-        {
-            if (x >= 0 && x < mapa.GetLength(0) && y >= 0 && y < mapa.GetLength(1))
-            {
-                mapa[x, y] = nuevoValor; // Actualizamos el valor de la posicion seleccionada con el nuevo valor establecido
-            }
-            else
-            {
-                Console.WriteLine("Coordenadas fuera del mapa. No se pudo actualizar la posición.");
-            }
+            return mapa; // Devuelve la matriz de TipoLocalizacion
         }
 
         public string BuscarEnMapa() // Método para buscar una posición específica en el mapa.
@@ -148,5 +130,61 @@ namespace TP_Integrador.clases
 
             return $"Posición: {mapa[x, y]}"; // Devuelve el tipo de terreno en la posición ingresada.
         }
+
+
     }
 }
+
+//public void CrearMapaVacio()
+//{
+//    for (int x = 0; x < mapa.GetLength(0); x++)
+//    {
+//        for (int y = 0; y < mapa.GetLength(1); y++)
+//        {
+//            mapa[x, y] = generadorLocalizaciones.LocalizacionAleatoria(); // Establecer inicialmente todo como TerrenoVacio
+//        }
+//    }
+//}
+
+//public enum Ubicaciones
+//{
+//    Cuartel,
+//    TerrenoBaldio,
+//    Planicie,
+//    Bosque,
+//    SectorUrbano,
+//    Vertedero,
+//    Lago,
+//    VertederoElectronico,
+//    SitioReciclaje
+//}
+
+//public Dictionary<Ubicaciones, (int x, int y)> coordenadasUbicaciones = new Dictionary<Ubicaciones, (int x, int y)>
+//{
+//    { Ubicaciones.Cuartel, (0, 0) },
+//    { Ubicaciones.Localizacion1, (40, 40) },
+//    { Ubicaciones.Localizacion2, (65, 50) },
+//    { Ubicaciones.Localizacion3, (122, 120) }
+//    // Se pueden añadir mas coordenadas eventualmente
+//};
+
+//public (int x, int y) ObtenerCoordenadasDeUbicacion(Ubicaciones listaUbicaciones)
+//{
+//    if (coordenadasUbicaciones.ContainsKey(listaUbicaciones))
+//    {
+//        return coordenadasUbicaciones[listaUbicaciones];
+//    }
+//    return (-1, -1);
+//}
+
+//public void ActualizarPosicion(int x, int y, string nuevoValor) // Metodo para Actualizar una posicion en especifico, podria ser de utilidad para el TP2
+//{
+//    if (x >= 0 && x < mapa.GetLength(0) && y >= 0 && y < mapa.GetLength(1))
+//    {
+//        mapa[x, y] = nuevoValor; // Actualizamos el valor de la posicion seleccionada con el nuevo valor establecido
+//    }
+//    else
+//    {
+//        Console.WriteLine("Coordenadas fuera del mapa. No se pudo actualizar la posición.");
+//    }
+//}

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TP_Integrador.clases;
 using static TP_Integrador.clases.GeneradorDeMapa;
 
-namespace TP_Integrador
+namespace TP_Integrador.clases
 {
     public class Cuartel
     {
@@ -16,21 +16,12 @@ namespace TP_Integrador
 
         string[,] mapa;
 
-        int id = 1;
+        int id = 0;
         int operadoresCreados = 0;
         int operadoresActivos = 0;
         int operadoresInactivos = 0;
 
-        private Dictionary<int, K9> operadoresK9 = new Dictionary<int, K9>();
-        private Dictionary<int, UAV> operadoresUAV = new Dictionary<int, UAV>();
-        private Dictionary<int, M8> operadoresM8 = new Dictionary<int, M8>();
 
-        public Cuartel()
-        {
-            mapa = generador.ObtenerMapa();
-            generador.CrearMapaVacio();
-            generador.ActualizarPosicion(generador.coordenadasUbicaciones[Ubicaciones.Cuartel].x, generador.coordenadasUbicaciones[Ubicaciones.Cuartel].y, "Cuartel");
-        }
         public void CrearOperador()
         {
 
@@ -50,24 +41,21 @@ namespace TP_Integrador
                     Operador operador = new UAV();
                     operador.id = i.ToString();
                     operadores.Add(operador);
-                    operadoresCreados++;
-                    id++;
+                    IncrementoOperadoresMaximos();
                 }
                 else if (seleccionUsuario == 2)
                 {
                     Operador operador = new K9();
                     operador.id = i.ToString();
                     operadores.Add(operador);
-                    operadoresCreados++;
-                    id++;
+                    IncrementoOperadoresMaximos();
                 }
                 else if (seleccionUsuario == 3)
                 {
                     Operador operador = new M8();
                     operador.id = i.ToString();
                     operadores.Add(operador);
-                    operadoresCreados++;
-                    id++;
+                    IncrementoOperadoresMaximos();
                 }
                 else
                 {
@@ -80,6 +68,11 @@ namespace TP_Integrador
             }
         }
 
+        public void IncrementoOperadoresMaximos()
+        {
+            operadoresCreados++;
+            id++;
+        }
         public void EliminarOperador()
         {
             Console.WriteLine("¿Qué tipo de operador desea eliminar?");
@@ -161,18 +154,18 @@ namespace TP_Integrador
 
         public void CantidadOperadoresActivos()
         {
-/*            Console.WriteLine($"Cantidad de operadores activos: {operadoresActivos} operadores");*/
+            /*            Console.WriteLine($"Cantidad de operadores activos: {operadoresActivos} operadores");*/
         }
 
         public void CantidadOperadoresInactivos()
         {
-/*            Console.WriteLine($"Cantidad de operadores en STANDBY: {operadoresInactivos} operadores");*/
+            /*            Console.WriteLine($"Cantidad de operadores en STANDBY: {operadoresInactivos} operadores");*/
         }
 
         public void CantidadDeOperadoresTotales()
         {
-/*            int total = operadoresActivos + operadoresInactivos;
-            Console.WriteLine($"Actualmente hay {total} operadores en servicio.");*/
+            /*            int total = operadoresActivos + operadoresInactivos;
+                        Console.WriteLine($"Actualmente hay {total} operadores en servicio.");*/
         }
 
         public void CambiarEstadoOperador()
@@ -185,16 +178,27 @@ namespace TP_Integrador
 
         }
 
-        public void TotalRecall()
-        {
-            // Aqui deberia poder acceder a las coordenadas del cuartel
-            var coordenadasCuartel = generador.coordenadasUbicaciones[Ubicaciones.Cuartel];
+        //private Dictionary<int, K9> operadoresK9 = new Dictionary<int, K9>();
+        //private Dictionary<int, UAV> operadoresUAV = new Dictionary<int, UAV>();
+        //private Dictionary<int, M8> operadoresM8 = new Dictionary<int, M8>();
 
-            // Y con un foreach itero en todos los operadores, y actualizo su coordenada actual por las coordenadas del cuartel
-            foreach (var operador in operadores)
-            {
-                operador.CambiarPosicionACuartel(coordenadasCuartel);
-            }
-        }
+        //public Cuartel()
+        //{
+        //    mapa = generador.ObtenerMapa();
+        //    generador.CrearMapaVacio();
+        //    generador.ActualizarPosicion(generador.coordenadasUbicaciones[Ubicaciones.Cuartel].x, generador.coordenadasUbicaciones[Ubicaciones.Cuartel].y, "Cuartel");
+        //}
+
+        //public void TotalRecall()
+        //{
+        //    // Aqui deberia poder acceder a las coordenadas del cuartel
+        //    var coordenadasCuartel = generador.coordenadasUbicaciones[Ubicaciones.Cuartel];
+
+        //    // Y con un foreach itero en todos los operadores, y actualizo su coordenada actual por las coordenadas del cuartel
+        //    foreach (var operador in operadores)
+        //    {
+        //        operador.CambiarPosicionACuartel(coordenadasCuartel);
+        //    }
+        //}
     }
 }
