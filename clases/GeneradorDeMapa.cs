@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static TP_Integrador.clases.GeneradorDeMapa;
 
+
 namespace TP_Integrador.clases
 {
     public class GeneradorDeMapa
@@ -28,27 +29,7 @@ namespace TP_Integrador.clases
                     }
                 }
             }
-        }
-
-        //private void ColocarCuartelEquidistante(int x, int y)
-        //{
-        //    // Obtener el número actual de cuarteles generados
-        //    int cuartelesGenerados = generadorLocalizaciones.ObtenerCantidadTerrenoGenerado(TipoLocalizaciones.TipoLocalizacion.Cuartel);
-
-        //    // Verificar si se ha alcanzado el límite de cuarteles
-        //    if (cuartelesGenerados < 3)
-        //    {
-        //        // Calcular la distancia mínima equilibrada entre cuarteles (ajusta según tus necesidades)
-        //        int distanciaMinima = mapa.GetLength(0) / 3; // Divide el mapa en 3 secciones
-
-        //        // Verificar si la posición actual cumple con la distancia mínima
-        //        if (x % distanciaMinima == 0 && y % distanciaMinima == 0)
-        //        {
-        //            // Colocar el cuartel en la posición
-        //            mapa[x, y] = TipoLocalizaciones.TipoLocalizacion.Cuartel;
-        //        }
-        //    }
-        //}
+        }        
 
         internal void MostrarMapa() // Metodo para mostrar todas las posiciones generadas y lo que posee
         {
@@ -136,6 +117,26 @@ namespace TP_Integrador.clases
 
     }
 }
+
+//private void ColocarCuartelEquidistante(int x, int y)
+//{
+//    // Obtener el número actual de cuarteles generados
+//    int cuartelesGenerados = generadorLocalizaciones.ObtenerCantidadTerrenoGenerado(TipoLocalizaciones.TipoLocalizacion.Cuartel);
+
+//    // Verificar si se ha alcanzado el límite de cuarteles
+//    if (cuartelesGenerados < 3)
+//    {
+//        // Calcular la distancia mínima equilibrada entre cuarteles (ajusta según tus necesidades)
+//        int distanciaMinima = mapa.GetLength(0) / 3; // Divide el mapa en 3 secciones
+
+//        // Verificar si la posición actual cumple con la distancia mínima
+//        if (x % distanciaMinima == 0 && y % distanciaMinima == 0)
+//        {
+//            // Colocar el cuartel en la posición
+//            mapa[x, y] = TipoLocalizaciones.TipoLocalizacion.Cuartel;
+//        }
+//    }
+//}
 
 //public void CrearMapaVacio()
 //{

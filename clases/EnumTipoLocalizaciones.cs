@@ -9,6 +9,7 @@ using TP_Integrador.clases;
 
 namespace TP_Integrador.clases
 {
+    
     public class TipoLocalizaciones
     {
         public enum TipoLocalizacion

@@ -8,6 +8,9 @@ namespace TP_Integrador.clases
 {
     public class Main
     {
-        
+        static void main(string[] args)
+        {
+            
+        }
     }
 }
