@@ -10,7 +10,10 @@ namespace TP_Integrador.clases
     {
         static void main(string[] args)
         {
-            
+            GeneradorDeMapa generadorDeMapa = new GeneradorDeMapa();
+
+            generadorDeMapa.CrearMapaVacio();
+            generadorDeMapa.MostrarMapa();
         }
     }
 }

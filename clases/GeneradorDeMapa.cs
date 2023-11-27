@@ -14,7 +14,7 @@ namespace TP_Integrador.clases
     {
         private GeneradorDeLocalizaciones generadorLocalizaciones = new GeneradorDeLocalizaciones();
 
-        TipoLocalizaciones.TipoLocalizacion[,] mapa = new TipoLocalizaciones.TipoLocalizacion[20, 20]; // Matriz Hardcodeada segun el tp integrador 2
+        TipoLocalizaciones.TipoLocalizacion[,] mapa = new TipoLocalizaciones.TipoLocalizacion[100, 100]; // Matriz Hardcodeada segun el tp integrador 2 (20,20 para probar funcionalidad)
 
         public void CrearMapaVacio()
         {
@@ -23,26 +23,59 @@ namespace TP_Integrador.clases
                 for (int y = 0; y < mapa.GetLength(1); y++)
                 {
                     TipoLocalizaciones.TipoLocalizacion localizacion = generadorLocalizaciones.LocalizacionAleatoria();
-                    if (localizacion == TipoLocalizaciones.TipoLocalizacion.Cuartel)
-                    {
-                        mapa[x, y] = generadorLocalizaciones.LocalizacionAleatoria();
-                    }
+                    mapa[x, y] = localizacion;
                 }
+            }
+
+            /* Posicion de cuarteles a distancias equilibradas segun el tamaño de la matriz a generar.
+             * 
+             * La generacion aleatoria de las posiciones con limites de generacion eran demasiado locas, le di un poco de logica al ponerlas en posiciones
+             * "Fijas", aunque no tanto ya que dependen del tamaño de la matriz a generar [100,100] segun el tp 2, de manera que estuvieran a distancias,
+             * mas o menos con algun sentido la una con la otra.
+             * 
+             * Misma Funcion para Los sitios de reciclaje.
+            */
+            PosicionarCuartelEnMatriz(1, 1);
+            PosicionarCuartelEnMatriz(mapa.GetLength(0) / 2, mapa.GetLength(1) / 2);
+            PosicionarCuartelEnMatriz(mapa.GetLength(0) - 9, mapa.GetLength(1) - 9);
+
+            PosicionarReciclajeEnMatriz(2, 2);
+            PosicionarReciclajeEnMatriz(mapa.GetLength(0) / 9, mapa.GetLength(1) / 9);
+            PosicionarReciclajeEnMatriz(mapa.GetLength(0) / 6, mapa.GetLength(1) / 6); 
+            PosicionarReciclajeEnMatriz(mapa.GetLength(0) / 2, mapa.GetLength(1) / 2);
+            PosicionarReciclajeEnMatriz(mapa.GetLength(0) - 10, mapa.GetLength(1) - 10);
+
+
+        }
+
+        private void PosicionarCuartelEnMatriz(int x, int y)
+        {
+            if (x >= 0 && x < mapa.GetLength(0) && y >= 0 && y < mapa.GetLength(1))
+            {
+                mapa[x, y] = TipoLocalizaciones.TipoLocalizacion.Cuartel;
+            }
+        }
+
+        private void PosicionarReciclajeEnMatriz(int x, int y)
+        {
+            if (x >= 0 && x < mapa.GetLength(0) && y >= 0 && y < mapa.GetLength(1))
+            {
+                mapa[x, y] = TipoLocalizaciones.TipoLocalizacion.SitioReciclaje;
             }
         }        
 
-        internal void MostrarMapa() // Metodo para mostrar todas las posiciones generadas y lo que posee
+        internal void MostrarMapa() // Metodo para mostrar todas las posiciones generadas y lo que posee cada una
         {
             for (int x = 0; x < mapa.GetLength(0); x++)
             {
                 for (int y = 0; y < mapa.GetLength(1); y++)
                 {
-                    Console.WriteLine($"Posición: [{x},{y}] - Tipo de terreno: {mapa[x, y]}");
+                    Console.WriteLine($"Posición: [ {x},{y} ] - Tipo de terreno: {mapa[x, y]}");
                 }
             }
         }
 
-        public int CalcularDistancia(int x1, int y1, int x2, int y2)
+        public int CalcularDistancia(int x1, int y1, int x2, int y2)  // Metodo creado para calcular distancias de un punto a otro.
         {
             int distanciaX = Math.Abs(x2 - x1); // Diferencia en unidades en el eje X
             int distanciaY = Math.Abs(y2 - y1); // Diferencia en unidades en el eje Y
@@ -57,12 +90,115 @@ namespace TP_Integrador.clases
             return mapa; // Devuelve la matriz de TipoLocalizacion
         }
 
+        public void FiltrarUbicacionesPorTipo()
+        {
+            bool continuar = false;
+
+            do
+            {
+                Console.WriteLine("Seleccione el tipo de localización que desea buscar:");
+                Console.WriteLine("1. Terreno Baldío");
+                Console.WriteLine("2. Planicie");
+                Console.WriteLine("3. Bosque");
+                Console.WriteLine("4. Sector Urbano");
+                Console.WriteLine("5. Vertedero");
+                Console.WriteLine("6. Lago");
+                Console.WriteLine("7. Vertedero Electrónico");
+                Console.WriteLine("8. Cuartel");
+                Console.WriteLine("9. Sitio de Reciclaje");
+
+                if (int.TryParse(Console.ReadLine(), out int opcion))
+                {
+                    TipoLocalizaciones.TipoLocalizacion tipoSeleccionado;
+
+                    switch (opcion)
+                    {
+                        case 1:
+                            tipoSeleccionado = TipoLocalizaciones.TipoLocalizacion.TerrenoBaldio;
+                            break;
+                        case 2:
+                            tipoSeleccionado = TipoLocalizaciones.TipoLocalizacion.Planicie;
+                            break;
+                        case 3:
+                            tipoSeleccionado = TipoLocalizaciones.TipoLocalizacion.Bosque;
+                            break;
+                        case 4:
+                            tipoSeleccionado = TipoLocalizaciones.TipoLocalizacion.SectorUrbano;
+                            break;
+                        case 5:
+                            tipoSeleccionado = TipoLocalizaciones.TipoLocalizacion.Vertedero;
+                            break;
+                        case 6:
+                            tipoSeleccionado = TipoLocalizaciones.TipoLocalizacion.Lago;
+                            break;
+                        case 7:
+                            tipoSeleccionado = TipoLocalizaciones.TipoLocalizacion.VertederoElectronico;
+                            break;
+                        case 8:
+                            tipoSeleccionado = TipoLocalizaciones.TipoLocalizacion.Cuartel;
+                            break;
+                        case 9:
+                            tipoSeleccionado = TipoLocalizaciones.TipoLocalizacion.SitioReciclaje;
+                            break;
+                        default:
+                            Console.WriteLine("Opción no válida.");
+                            continue;
+                    }
+
+                    // Filtrar y mostrar ubicaciones del tipo seleccionado
+                    MostrarUbicacionesFiltradas(tipoSeleccionado);
+
+                    // Preguntar si desea buscar otra ubicación
+                    int respuesta;
+                    do
+                    {
+                        Console.WriteLine("¿Desea buscar otra ubicación?");
+                        Console.WriteLine("1. Sí");
+                        Console.WriteLine("2. No");
+
+                        if (int.TryParse(Console.ReadLine(), out respuesta) && (respuesta == 1 || respuesta == 2))
+                        {
+                            continuar = (respuesta == 1);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Opción no válida. Ingrese 1 para Sí o 2 para No.");
+                        }
+                    } while (true);
+                }
+                else
+                {
+                    Console.WriteLine("Opción no válida. Ingrese un número.");
+                }
+            } while (continuar!);
+        }
+
+
+
+        private void MostrarUbicacionesFiltradas(TipoLocalizaciones.TipoLocalizacion tipoSeleccionado)
+        {
+            Console.WriteLine($"Ubicaciones de tipo {tipoSeleccionado}:");
+
+            for (int x = 0; x < mapa.GetLength(0); x++)
+            {
+                for (int y = 0; y < mapa.GetLength(1); y++)
+                {
+                    if (mapa[x, y] == tipoSeleccionado)
+                    {
+                        Console.WriteLine($"Posición: [{x},{y}] - Tipo de terreno: {tipoSeleccionado}");
+                    }
+                }
+            }
+        }
+
+
         public string BuscarEnMapa() // Método para buscar una posición específica en el mapa.
         {
             int x = 0; // Inicialización de la coordenada x.
             int y = 0; // Inicialización de la coordenada y.
 
-            bool coordenadasValidas = false; // Variable booleana para comprobar la validez de las coordenadas.
+            bool coordenadasValidas = false; // Para que vea que no le mande un While(true)
 
             while (!coordenadasValidas) // Bucle para solicitar las coordenadas hasta que sean válidas.
             {
@@ -117,6 +253,18 @@ namespace TP_Integrador.clases
 
     }
 }
+
+//public void CrearMapaVacio()
+//{
+//    for (int x = 0; x < mapa.GetLength(0); x++)
+//    {
+//        for (int y = 0; y < mapa.GetLength(1); y++)
+//        {
+//            TipoLocalizaciones.TipoLocalizacion localizacion = generadorLocalizaciones.LocalizacionAleatoria();
+//            mapa[x, y] = localizacion;
+//        }
+//    }
+//}        
 
 //private void ColocarCuartelEquidistante(int x, int y)
 //{

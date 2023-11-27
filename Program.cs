@@ -1,6 +1,20 @@
-﻿// See https://aka.ms/new-console-template for more information
-using TP_Integrador;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-Console.WriteLine("Hello, World!");
-Cuartel cuartel = new Cuartel();
-cuartel.CrearOperador();
+namespace TP_Integrador.clases
+{
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            GeneradorDeMapa generadorDeMapa = new GeneradorDeMapa();
+
+            generadorDeMapa.CrearMapaVacio();
+            generadorDeMapa.MostrarMapa();
+            generadorDeMapa.FiltrarUbicacionesPorTipo();
+        }
+    }
+}

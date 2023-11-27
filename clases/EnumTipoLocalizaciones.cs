@@ -9,12 +9,11 @@ using TP_Integrador.clases;
 
 namespace TP_Integrador.clases
 {
-    
+
     public class TipoLocalizaciones
     {
         public enum TipoLocalizacion
         {
-            Cuartel,
             TerrenoBaldio,
             Planicie,
             Bosque,
@@ -22,7 +21,8 @@ namespace TP_Integrador.clases
             Vertedero,
             Lago,
             VertederoElectronico,
-            SitioReciclaje
+            SitioReciclaje,
+            Cuartel
         }
     }
 
@@ -36,75 +36,53 @@ namespace TP_Integrador.clases
         public TipoLocalizaciones.TipoLocalizacion LocalizacionAleatoria()
         {
             Random random = new Random();
-            int terrenoAleatorio = random.Next(100);
+            int terrenoAleatorio = random.Next(0, 100);
 
             // Probabilidad de terrenos comunes
-            if (terrenoAleatorio >= 0 && terrenoAleatorio <= 25)
+            if (terrenoAleatorio >= 0 && terrenoAleatorio <= 40)
             {
                 return TipoLocalizaciones.TipoLocalizacion.TerrenoBaldio;
             }
-            else if (terrenoAleatorio > 25 && terrenoAleatorio <= 40)
+            else if (terrenoAleatorio > 40 && terrenoAleatorio <= 60)
             {
                 return TipoLocalizaciones.TipoLocalizacion.Planicie;
             }
-            else if (terrenoAleatorio > 40 && terrenoAleatorio <= 60)
+            else if (terrenoAleatorio > 60 && terrenoAleatorio <= 75)
             {
                 return TipoLocalizaciones.TipoLocalizacion.Bosque;
             }
-            else if (terrenoAleatorio > 60 && terrenoAleatorio <= 75)
+            else if (terrenoAleatorio > 75 && terrenoAleatorio <= 80)
             {
                 return TipoLocalizaciones.TipoLocalizacion.SectorUrbano;
             }
-            else if (terrenoAleatorio > 75 && terrenoAleatorio <= 100)
+            else if (terrenoAleatorio > 80 && terrenoAleatorio <= 85)
             {
-                // Aca añadimos los sitios con efecto especial, y limitamos los cuarteles y sitios de reciclaje.
-                int terrenoAleatorio2 = random.Next(100);
-
-                if (terrenoAleatorio2 >= 0 && terrenoAleatorio2 <= 25)
-                {
-                    return TipoLocalizaciones.TipoLocalizacion.Vertedero;
-                }
-                else if (terrenoAleatorio2 > 25 && terrenoAleatorio2 <= 40)
-                {
-                    return TipoLocalizaciones.TipoLocalizacion.VertederoElectronico;
-                }
-                else if (terrenoAleatorio2 > 40 && terrenoAleatorio2 <= 50)
-                {
-                    return TipoLocalizaciones.TipoLocalizacion.Lago;
-                }
-                else if (terrenoAleatorio2 > 50 && terrenoAleatorio2 < 65)
-                {
-                    if (cuartelesMaximos < LimiteCuarteles)
-                    {
-                        cuartelesMaximos++;
-                        return TipoLocalizaciones.TipoLocalizacion.Cuartel;
-                    }
-                    else
-                    {
-                        return TipoLocalizaciones.TipoLocalizacion.Planicie;
-                    }
-                }
-                else if (terrenoAleatorio2 > 65 && terrenoAleatorio2 < 80)
-                {
-                    if (sitioReciclajeMaximo < LimiteSitiosReciclaje)
-                    {
-                        sitioReciclajeMaximo++;
-                        return TipoLocalizaciones.TipoLocalizacion.SitioReciclaje;
-                    }
-                    else
-                    {
-                        return TipoLocalizaciones.TipoLocalizacion.Bosque;
-                    }
-                }
-                else
-                {
-                    // En caso de algún error, lanzar una excepción o manejar de otra manera.
-                    throw new InvalidOperationException("Error en la generación de localizaciones aleatorias.");
-                }
+                return TipoLocalizaciones.TipoLocalizacion.Vertedero;
             }
-
-            // En caso de algún error, lanzar una excepción o manejar de otra manera.
-            throw new InvalidOperationException("Error en la generación de localizaciones aleatorias.");
+            else if (terrenoAleatorio > 85 && terrenoAleatorio <= 90)
+            {
+                return TipoLocalizaciones.TipoLocalizacion.Lago;
+            }
+            else if (terrenoAleatorio > 90 && terrenoAleatorio <= 93)
+            {
+                return TipoLocalizaciones.TipoLocalizacion.VertederoElectronico;
+            }            
+            //else if (terrenoAleatorio > 93 && terrenoAleatorio <= 100)
+            //{
+            //    if (sitioReciclajeMaximo < LimiteSitiosReciclaje)
+            //    {
+            //        sitioReciclajeMaximo++;
+            //        return TipoLocalizaciones.TipoLocalizacion.SitioReciclaje;
+            //    }
+            //    else
+            //    {
+            //        return TipoLocalizaciones.TipoLocalizacion.Bosque;
+            //    }
+            //}
+            else
+            {
+                return TipoLocalizaciones.TipoLocalizacion.Planicie;
+            }
         }
     }
 }
