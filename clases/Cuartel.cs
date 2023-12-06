@@ -37,32 +37,29 @@ namespace TP_Integrador.clases
 
             for (int i = 1; i <= cantOperadores; i++)
             {
-
+                Operador operador = null;
                 if (seleccionUsuario == 1)
                 {
-                    Operador operador = new UAV();
-                    operador.id = i.ToString();
-                    operadores.Add(operador);
-                    IncrementoOperadoresMaximos();
+                    operador = new UAV();
+                    operador.id = operadores.Count().ToString();
+
                 }
                 else if (seleccionUsuario == 2)
                 {
-                    Operador operador = new K9();
-                    operador.id = i.ToString();
-                    operadores.Add(operador);
-                    IncrementoOperadoresMaximos();
+                    operador = new K9();
+                    operador.id = operadores.Count().ToString();
                 }
                 else if (seleccionUsuario == 3)
                 {
-                    Operador operador = new M8();
-                    operador.id = i.ToString();
-                    operadores.Add(operador);
-                    IncrementoOperadoresMaximos();
+                    operador = new M8();
+                    operador.id = operadores.Count().ToString();
                 }
                 else
                 {
                     Console.WriteLine("opcion incorrecta");
                 }
+                operadores.Add(operador);
+                IncrementoOperadoresMaximos();
             }
             foreach (var operador in operadores)
             {

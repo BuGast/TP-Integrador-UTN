@@ -19,11 +19,8 @@ namespace TP_Integrador
 
         public Operador()
         {
-            this.id = "0";
             this.bateria = new Bateria();
             this.estado = Estado.EnEspera.ToString();
-            this.cargaMaxima = 0;
-            this.cargaActual = 0;
             this.velocidadOptima = 1;
             this.coordActual= new int[1, 1];   
             //this.coordActual= Coordenada[0,0];

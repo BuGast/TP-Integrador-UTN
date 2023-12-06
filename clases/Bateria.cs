@@ -35,23 +35,6 @@ namespace TP_Integrador
             Console.WriteLine("Se actualizaron los valores de las baterías");
         }
 
-
-/*        public void DescargarBateria(int carga)
-        {
-            if (carga > 0)
-            {
-                if (carga <= this.cargaActual)
-                {
-                    this.cargaActual += carga;
-                    Console.WriteLine("Se descargo la bateria");
-                }
-                else
-                {
-                    Console.WriteLine("Error la descarga es mayor a la carga actual de la bateria");
-                }
-            }
-        }*/
-
         public int MostrarCargaMaxima()
         {
             return cargaMaxima;
