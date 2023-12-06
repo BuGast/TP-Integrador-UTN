@@ -13,6 +13,7 @@ namespace TP_Integrador.clases
 
         private TiposZonas[,] terrenos;
         private Random random;
+
         private List<TiposZonas> LocalizacionesAptasParaCuartel = new List<TiposZonas>
         {
             TiposZonas.TerrenoBaldio,
@@ -60,6 +61,63 @@ namespace TP_Integrador.clases
             else
                 return TiposZonas.TerrenoBaldio;
         }
+        private void GenerarCuarteles()
+        {
+            int cuartelesGenerados = 0;
+
+            while (cuartelesGenerados < MaxCuarteles)
+            {
+                int x = random.Next(TamanioMapaKm2);
+                int y = random.Next(TamanioMapaKm2);
+
+                if (LocalizacionesAptasParaCuartel.Contains(terrenos[x,y]))
+                {
+                    terrenos[x, y] = TiposZonas.Cuartel;
+                    cuartelesGenerados++;
+                }
+            }
+        }
+
+        public void MostrarMapa()
+        {
+            for (int x = 0; x < TamanioMapaKm2; x++)
+            {
+                for (int y = 0; y < TamanioMapaKm2; y++)
+                {
+                    Console.Write(ObtenerSimboloTerreno(terrenos[x, y]) + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        private char ObtenerSimboloTerreno(TiposZonas terreno)
+        {
+            switch (terreno)
+            {
+                case TiposZonas.TerrenoBaldio:
+                    return 'B';
+                case TiposZonas.Planicie:
+                    return 'P';
+                case TiposZonas.Bosque:
+                    return 'F';
+                case TiposZonas.SectorUrbano:
+                    return 'U';
+                case TiposZonas.Vertedero:
+                    return 'V';
+                case TiposZonas.Lago:
+                    return 'L';
+                case TiposZonas.VertederoElectronico:
+                    return 'V';
+                case TiposZonas.SitioReciclaje:
+                    return 'R';
+                case TiposZonas.Cuartel:
+                    return 'C';
+                default:
+                    return ' ';
+            }
+        }
+
+
     }
 
 }

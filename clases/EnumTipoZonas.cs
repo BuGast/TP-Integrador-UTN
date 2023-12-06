@@ -17,5 +17,6 @@ namespace TP_Integrador.clases
         Lago,
         VertederoElectronico,
         SitioReciclaje,
+        Cuartel
     }
 }

@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TP_Integrador.clases;
-using static TP_Integrador.clases.GeneradorDeMapa;
 
 namespace TP_Integrador.clases
 {
@@ -14,7 +13,6 @@ namespace TP_Integrador.clases
     {
 
         List<Operador> operadores = new List<Operador>();
-        GeneradorDeMapa generador = new GeneradorDeMapa();
 
         string[,] mapa;
 
@@ -48,10 +46,10 @@ namespace TP_Integrador.clases
                 {
                     operador = new K9();
                     operador.id = operadores.Count().ToString();
-                }
-                else if (seleccionUsuario == 3)
-                {
-                    operador = new M8();
+                }                                               
+                else if (seleccionUsuario == 3)                 
+                {                                               
+                    operador = new M8();                        
                     operador.id = operadores.Count().ToString();
                 }
                 else
