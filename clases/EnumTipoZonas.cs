@@ -1,6 +1,4 @@
-﻿// GUSTAVO MARTIN CANTARELLA
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +7,7 @@ using TP_Integrador.clases;
 
 namespace TP_Integrador.clases
 {
-    public enum TiposLocalizaciones
+    public enum TiposZonas
     {
         TerrenoBaldio,
         Planicie,
@@ -19,6 +17,5 @@ namespace TP_Integrador.clases
         Lago,
         VertederoElectronico,
         SitioReciclaje,
-        Cuartel
     }
 }
