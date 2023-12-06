@@ -17,22 +17,26 @@ namespace TP_Integrador
             this.cargaMaxima = cargaM;
             this.cargaActual = cargaMaxima;
         }
-        public void RecargarBateria(int carga)
+        public void CargaYDescargaBateria(int carga, Bateria bateria2)
         {
-            if (carga > 0)
+            if (carga > 0 && carga<= bateria2.cargaActual)
             {
                 if ((carga + this.cargaActual) <= this.cargaMaxima)
                 {
                     this.cargaActual += carga;
-                    Console.WriteLine("Se recargo la bateria");
+                    bateria2.cargaActual -= carga;   
                 }
                 else
                 {
-                    Console.WriteLine("La energia excede la bateria maxima");
+                    bateria2.cargaActual -= this.cargaActual - this.cargaMaxima;
+                    this.cargaActual = this.cargaMaxima;
                 }
             }
+            Console.WriteLine("Se actualizaron los valores de las baterías");
         }
-        public void DescargarBateria(int carga)
+
+
+/*        public void DescargarBateria(int carga)
         {
             if (carga > 0)
             {
@@ -46,7 +50,7 @@ namespace TP_Integrador
                     Console.WriteLine("Error la descarga es mayor a la carga actual de la bateria");
                 }
             }
-        }
+        }*/
 
         public int MostrarCargaMaxima()
         {
