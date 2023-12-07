@@ -38,6 +38,7 @@ namespace TP_Integrador.clases
             GenerarCuarteles();
         }
 
+        public TiposZonas[,] getTerrenos() { return  terrenos; }
         private void GenerarMapa()
         {
             for (int x = 0; x < TamanioMapaKm2; x++)

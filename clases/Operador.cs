@@ -69,41 +69,54 @@ namespace TP_Integrador
             int yActual = this.coordY;
             int xDestino = x; // Obtener la coordenada de destino
             int yDestino = y;
-
+            int valor = 0;
             // Verifico si la coordenada de destino es válida en relación con la posición actual del operador
             if (xDestino >= 0 && xDestino <= mapa.getTamanioMapaKm2() && //me fijo que xDestino sea >=0 y que sea < que el valor máximo de la coord en X del mapa
                 yDestino >= 0 && yDestino <= mapa.getTamanioMapaKm2())
             {
-                while (xActual != xDestino || yActual != yDestino)
+                while ((xActual != xDestino || yActual != yDestino)&&valor==0)
                 {
                     if (xActual < xDestino)
                     {
                         xActual++;
-                        
+                        analizarSituacionDelOperador(xActual,yActual,mapa.getTerrenos());
                     }
                     else if (xActual > xDestino)
                     {
                         xActual--;
+                        analizarSituacionDelOperador(xActual,yActual, mapa.getTerrenos());
                     }
 
                     if (yActual < yDestino)
                     {
                         yActual++;
+                        analizarSituacionDelOperador(xActual,yActual, mapa.getTerrenos());
                     }
                     else if (yActual > yDestino)
                     {
                         yActual--;
+                        analizarSituacionDelOperador(xActual,yActual, mapa.getTerrenos());
                     }
-
-                    // Actualizo la coordenada actual del operador
-                    /*                    coordActual[xActual, yActual];*/
-                    // Aquí podría poner luego una función que analice el terreno en el que está y en base a eso ejecute alguna funcionalidad (tp2)
                 }
+                // Actualizo la coordenada actual del operador
+                this.coordX = xActual;
+                this.coordY = yActual;
             }
             else
             {
                 Console.WriteLine("La coordenada de destino no es válida");
             }
+        }
+
+        public int analizarSituacionDelOperador(int xActual,int yActual, TiposZonas[,] terrenos)
+        {
+            int valor = 0;
+            TiposZonas terrenoActual = terrenos[xActual,yActual];
+            if ((GetType().Name == "K9"|| GetType().Name == "M8") && terrenoActual == TiposZonas.Lago)
+            {
+                valor=1;
+            }
+            return valor;
         }
 
         public void MostrarDetallesOperador()
