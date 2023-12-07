@@ -77,7 +77,7 @@ namespace TP_Integrador.clases
                 {
                     terrenos[x, y] = TiposZonas.Cuartel;
                     cuartelesGenerados++;
-                    listaDeCuarteles.Add(new Cuartel(cuartelesGenerados,x, y));
+                    listaDeCuarteles.Add(new Cuartel(cuartelesGenerados.ToString(),x, y));
                 }
             }
         }

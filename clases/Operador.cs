@@ -43,6 +43,7 @@ namespace TP_Integrador
                 Console.WriteLine("error el operador no puede levantar la carga");
             }
         }
+
         public void CargarBateria(Operador operador)
         {
             operador.bateria.RecargarBateria((bateria.MostrarCargaMaxima() - bateria.MostrarCargaActual()));

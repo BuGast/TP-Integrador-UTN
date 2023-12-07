@@ -14,12 +14,23 @@ namespace TP_Integrador.clases
 
         List<Operador> operadores = new List<Operador>();
 
-        string[,] mapa;
+        string id;
+        int coordX;
+        int coordY;
 
-        int id = 0;
-        int operadoresCreados = 0;
-        int operadoresActivos = 0;
-        int operadoresInactivos = 0;
+        public Cuartel(string id,int x,int y) 
+        {
+            this.id = id;
+            this.coordX = x;
+            this.coordY = y;
+
+        }
+        /* string[,] mapa;
+
+         int id = 0;
+         int operadoresCreados = 0;
+         int operadoresActivos = 0;
+         int operadoresInactivos = 0;*/
 
 
         public void CrearOperador()
