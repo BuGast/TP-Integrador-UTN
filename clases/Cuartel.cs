@@ -43,16 +43,16 @@ namespace TP_Integrador.clases
                 Operador operador = null;
                 if (seleccionUsuario == 1)
                 {
-                    operador = new UAV(idOperador, this.coordX, this.coordY);
+                    operador = new UAV(idOperador, this.coordX, this.coordY, (int)BateriaOperadores.UAV, (int)CargaFisicaOperadores.UAV);
 
                 }
                 else if (seleccionUsuario == 2)
                 {
-                    operador = new K9(idOperador, this.coordX, this.coordY);
+                    operador = new K9(idOperador, this.coordX, this.coordY, (int)BateriaOperadores.K9, (int)CargaFisicaOperadores.K9);
                 }                                               
                 else if (seleccionUsuario == 3)                 
                 {                                               
-                    operador = new M8(idOperador, this.coordX, this.coordY);                        
+                    operador = new M8(idOperador, this.coordX, this.coordY, (int) BateriaOperadores.M8, (int)CargaFisicaOperadores.M8);                        
                 }
                 else
                 {

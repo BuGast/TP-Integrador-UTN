@@ -11,19 +11,10 @@ namespace TP_Integrador
 {
     public class M8 : Operador
     {
-        BateriaOperadores valorBateria;
         CargaFisicaOperadores valorCargaFisica;
-        public M8(string id, int coordX, int coordY)
-            : base(id, coordX, coordY)
+        public M8(string id, int coordX, int coordY, int cargaBateria, int cargaFisica)
+            : base(id, coordX, coordY, cargaBateria, cargaFisica)
         {
-            if (Enum.TryParse(BateriaOperadores.M8.ToString(), out valorBateria))
-            {
-                bateria.CargarCargaMaxima(Convert.ToInt32(valorBateria));
-            }
-            if (Enum.TryParse(CargaFisicaOperadores.M8.ToString(), out valorCargaFisica))
-            {
-                cargaMaxima = Convert.ToInt32(valorCargaFisica);
-            }
         }
 
         public override void Mover(int[,] coordDeDestino, int[,] coordMapa)

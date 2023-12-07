@@ -15,18 +15,9 @@ namespace TP_Integrador
         BateriaOperadores valorBateria;
         CargaFisicaOperadores valorCargaFisica;
 
-        public UAV(string id,int coordX, int coordY)
-            : base(id, coordX, coordY)
+        public UAV(string id,int coordX, int coordY, int cargaBateria, int cargaFisica)
+            : base(id, coordX, coordY, cargaBateria, cargaFisica)
         {
-            if (Enum.TryParse(BateriaOperadores.UAV.ToString(), out valorBateria))
-            {
-                bateria.CargarCargaMaxima(Convert.ToInt32(valorBateria));
-            }
-            if (Enum.TryParse(CargaFisicaOperadores.UAV.ToString(), out valorCargaFisica))
-            {
-                cargaMaxima = Convert.ToInt32(valorCargaFisica);
-            }
-
         }
 
         public override void Mover(int[,] coordDeDestino, int[,]coordMapa)

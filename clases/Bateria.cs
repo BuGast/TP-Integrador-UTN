@@ -14,11 +14,17 @@ namespace TP_Integrador
         private int cargaMaxima;
         private int cargaActual;
 
-        public void CargarCargaMaxima(int cargaM)
+        public Bateria(int cargaMaxima)
+        {
+            this.cargaMaxima = cargaMaxima;
+            this.cargaActual = this.cargaMaxima;
+        }
+
+/*        public void CargarCargaMaxima(int cargaM)
         {
             this.cargaMaxima = cargaM;
             this.cargaActual = cargaMaxima;
-        }
+        }*/
         public void CargaYDescargaBateria(int carga, Bateria bateria2)
         {
             if (carga > 0 && carga<= bateria2.cargaActual)

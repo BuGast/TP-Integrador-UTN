@@ -20,10 +20,12 @@ namespace TP_Integrador
         int coordX;
         int coordY;
 
-        public Operador(string id,int coordX, int coordY)
+        public Operador(string id,int coordX, int coordY, int cargaBateria, int cargaFisica)
         {
             this.id = id;
+            this.bateria = new Bateria(cargaBateria);
             this.estado = Estado.EnEspera.ToString();
+            this.cargaFisicaMaxima = cargaFisica;
             this.velocidadOptima = 1;
             this.coordX = coordX;
             this.coordY = coordY;
@@ -32,7 +34,6 @@ namespace TP_Integrador
         public string getId(){ return id; }
         public int getCoordX(){ return this.coordX; }
         public int getCoordY() { return this.coordY;}
-
         public void ComprobarBateriaActual()
         {
             Console.WriteLine("carga maxima: " + bateria.MostrarCargaMaxima());

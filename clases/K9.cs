@@ -14,17 +14,9 @@ namespace TP_Integrador
     {
         BateriaOperadores valorBateria;
         CargaFisicaOperadores valorCargaFisica;
-        public K9(string id, int coordX, int coordY)
-            : base(id, coordX, coordY)
+        public K9(string id, int coordX, int coordY, int cargaBateria, int cargaFisica)
+            : base(id, coordX, coordY, cargaBateria, cargaFisica)
         {
-            if (Enum.TryParse(BateriaOperadores.K9.ToString(), out valorBateria))
-            {
-                bateria.CargarCargaMaxima(Convert.ToInt32(valorBateria));
-            }
-            if (Enum.TryParse(CargaFisicaOperadores.K9.ToString(), out valorCargaFisica))
-            {
-                cargaMaxima = Convert.ToInt32(valorCargaFisica);
-            }
         }
 
         public override void Mover(int[,] coordDeDestino, int[,] coordMapa)
