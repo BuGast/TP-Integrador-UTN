@@ -9,20 +9,22 @@ namespace TP_Integrador
     public abstract class Operador
     {
 
-        public string id { get; set; }
-        public Bateria bateria { get; set; }
-        public string estado { get; set; }
-        public int cargaMaxima { get; set; }
-        public int cargaActual { get; set; }
-        public int velocidadOptima { get; set; }
-        public int[,] coordActual { get; set; }
+        string id;
+        Bateria bateria;
+        string estado;
+        int cargaFisicaMaxima;
+        int cargaFisicaActual;
+        int velocidadOptima;
+        int coordX;
+        int coordY;
 
-        public Operador()
+        public Operador(string id,int coordX, int coordY)
         {
-            this.bateria = new Bateria();
+            this.id = id;
             this.estado = Estado.EnEspera.ToString();
             this.velocidadOptima = 1;
-            this.coordActual= new int[1, 1];   
+            this.coordX = coordX;
+            this.coordY = coordY;
         }
 
         public void ComprobarBateriaActual()
@@ -63,6 +65,23 @@ namespace TP_Integrador
         }
 
         public abstract void Mover(int[,] coordDeDestino, int[,] coordMapa);
+
+
+        public void MostrarDetallesOperador()
+        {
+            Console.WriteLine(GetType().Name);
+            Console.WriteLine("id: " + id);
+            Console.WriteLine("estado: " + estado);
+            Console.WriteLine("cargaMaxima: " + cargaFisicaMaxima + " kg");
+            Console.WriteLine("velocidad optima: " + velocidadOptima);
+            Console.WriteLine("coordenada actual: (" + this.coordX+" - "+this.coordY+")");
+            Console.WriteLine("");
+            Console.WriteLine("BATERIA");
+            Console.WriteLine("carga maxima: " + bateria.MostrarCargaMaxima() + " mAh");
+            Console.WriteLine("carga actual: " + bateria.MostrarCargaActual() + " mAh");
+            Console.WriteLine("---------------------------------------------------------");
+
+        }
     }
 
 }
