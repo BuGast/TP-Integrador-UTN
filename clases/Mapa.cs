@@ -8,6 +8,8 @@ namespace TP_Integrador.clases
 {
     public class Mapa
     {
+        List<Cuartel> listaDeCuarteles = new List<Cuartel>();
+
         private const int TamanioMapaKm2 = 100;
         private const int MaxCuarteles = 3;
 
@@ -75,6 +77,7 @@ namespace TP_Integrador.clases
                 {
                     terrenos[x, y] = TiposZonas.Cuartel;
                     cuartelesGenerados++;
+                    listaDeCuarteles.Add(new Cuartel(cuartelesGenerados,x, y));
                 }
             }
         }
