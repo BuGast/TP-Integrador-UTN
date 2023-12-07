@@ -28,6 +28,11 @@ namespace TP_Integrador
             this.coordX = coordX;
             this.coordY = coordY;
         }
+        public string getEstado(){ return estado; }
+        public string getId(){ return id; }
+        public int getCoordX(){ return this.coordX; }
+        public int getCoordY() { return this.coordY;}
+
         public void ComprobarBateriaActual()
         {
             Console.WriteLine("carga maxima: " + bateria.MostrarCargaMaxima());

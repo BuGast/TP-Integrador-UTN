@@ -25,13 +25,6 @@ namespace TP_Integrador.clases
             this.coordY = y;
 
         }
-        /* string[,] mapa;
-
-         int id = 0;
-         int operadoresCreados = 0;
-         int operadoresActivos = 0;
-         int operadoresInactivos = 0;*/
-
 
         public void CrearOperador()
         {
@@ -73,78 +66,32 @@ namespace TP_Integrador.clases
             }*/
         }
 
-
-        public void MostrarDetallesOperador(Operador operador)
-        {
-            Console.WriteLine(operador.GetType().Name);
-            Console.WriteLine("id: " + operador.id);
-            Console.WriteLine("estado: " + operador.estado);
-            Console.WriteLine("cargaMaxima: " + operador.cargaMaxima + " kg");
-            Console.WriteLine("velocidad optima: " + operador.velocidadOptima);
-            Console.WriteLine("coordenada actual: " + operador.coordActual[0, 0]);
-            Console.WriteLine("");
-            Console.WriteLine("BATERIA");
-            Console.WriteLine("carga maxima: " + operador.bateria.MostrarCargaMaxima() + " mAh");
-            Console.WriteLine("carga actual: " + operador.bateria.MostrarCargaActual() + " mAh");
-            Console.WriteLine("---------------------------------------------------------");
-
-        }
-
         public void MostrarDetallesOperadoresCreados()
         {
             foreach (var operador in operadores)
             {
-                MostrarDetallesOperador(operador);
+                operador.MostrarDetallesOperador();
             }
         }
 
-        public void CantidadOperadoresActivos()
+        public void MostrarEstadoTodosLosOperadores()
         {
-            /*            Console.WriteLine($"Cantidad de operadores activos: {operadoresActivos} operadores");*/
+            foreach (var operador in operadores)
+            {
+                Console.WriteLine("Id: "+operador.getId+": "+operador.getEstado());
+            }
+        }
+        public void MostrarEstadoOperadoresEnCiertaLocalizacion(int x, int y)
+        {
+            foreach (var operador in operadores)
+            {
+                if (operador.getCoordX()==x&& operador.getCoordY() == y)
+                Console.WriteLine("Id: " + operador.getId + ": " + operador.getEstado());
+            }
         }
 
-        public void CantidadOperadoresInactivos()
-        {
-            /*            Console.WriteLine($"Cantidad de operadores en STANDBY: {operadoresInactivos} operadores");*/
-        }
 
-        public void CantidadDeOperadoresTotales()
-        {
-            /*            int total = operadoresActivos + operadoresInactivos;
-                        Console.WriteLine($"Actualmente hay {total} operadores en servicio.");*/
-        }
 
-        public void CambiarEstadoOperador()
-        {
 
-        }
-
-        public void EnviarOperadorALocalizacion()
-        {
-
-        }
-
-        //private Dictionary<int, K9> operadoresK9 = new Dictionary<int, K9>();
-        //private Dictionary<int, UAV> operadoresUAV = new Dictionary<int, UAV>();
-        //private Dictionary<int, M8> operadoresM8 = new Dictionary<int, M8>();
-
-        //public Cuartel()
-        //{
-        //    mapa = generador.ObtenerMapa();
-        //    generador.CrearMapaVacio();
-        //    generador.ActualizarPosicion(generador.coordenadasUbicaciones[Ubicaciones.Cuartel].x, generador.coordenadasUbicaciones[Ubicaciones.Cuartel].y, "Cuartel");
-        //}
-
-        //public void TotalRecall()
-        //{
-        //    // Aqui deberia poder acceder a las coordenadas del cuartel
-        //    var coordenadasCuartel = generador.coordenadasUbicaciones[Ubicaciones.Cuartel];
-
-        //    // Y con un foreach itero en todos los operadores, y actualizo su coordenada actual por las coordenadas del cuartel
-        //    foreach (var operador in operadores)
-        //    {
-        //        operador.CambiarPosicionACuartel(coordenadasCuartel);
-        //    }
-        //}
     }
 }

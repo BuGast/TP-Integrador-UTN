@@ -123,7 +123,7 @@ namespace TP_Integrador.clases
             }
         }
 
-        static (int, int)[] BuscarEnElMapa(TiposZonas[,] terrenos, TiposZonas zonaBuscada)
+        static (int, int)[] BuscarZonaEnElMapa(TiposZonas[,] terrenos, TiposZonas zonaBuscada)
         {
             int filas = terrenos.GetLength(0);
             int columnas = terrenos.GetLength(1);
