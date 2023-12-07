@@ -118,6 +118,20 @@ namespace TP_Integrador.clases
             }
         }
 
+        static (int, int)[] BuscarEnElMapa(TiposZonas[,] terrenos, TiposZonas zonaBuscada)
+        {
+            int filas = terrenos.GetLength(0);
+            int columnas = terrenos.GetLength(1);
+            var posiciones = Enumerable.Range(0, filas)
+                .SelectMany(fila => Enumerable.Range(0, columnas).Select(columna => (fila, columna)))
+                .Where(p => terrenos[p.Item1, p.Item2] == zonaBuscada)
+                .ToArray();
+
+            return posiciones;
+        }
+
+
+
 
     }
 

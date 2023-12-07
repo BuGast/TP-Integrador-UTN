@@ -23,37 +23,20 @@ namespace TP_Integrador
             this.estado = Estado.EnEspera.ToString();
             this.velocidadOptima = 1;
             this.coordActual= new int[1, 1];   
-            //this.coordActual= Coordenada[0,0];
         }
 
-
-        //public class Coordenada
-        //{
-        //    public int X { get; set; }
-        //    public int Y { get; set; }
-
-        //    public Coordenada(int x, int y)
-        //    {
-        //        X = x;
-        //        Y = y;
-        //    }
-        //}
         public void ComprobarBateriaActual()
         {
             Console.WriteLine("carga maxima: " + bateria.MostrarCargaMaxima());
             Console.WriteLine("carga actual: " + bateria.MostrarCargaActual());
         }
-        public void TransferirCargaBateria(Operador operador1, Operador operador2, int carga)
+
+        public void TransferirCargaFisica(Operador operador2, int carga)
         {
-            operador1.bateria.DescargarBateria(carga);
-            operador2.bateria.RecargarBateria(carga);
-        }
-        public void TransferirCargaFisica(Operador operador1, Operador operador2, int carga)
-        {
-            if (operador2.cargaMaxima >= operador1.cargaMaxima) 
+            if (operador2.cargaMaxima >= this.cargaMaxima) 
             {
-                operador2.cargaActual = operador1.cargaActual;
-                operador1.cargaActual = 0;
+                operador2.cargaActual = this.cargaActual;
+                this.cargaActual = 0;
             }
             else
             {
