@@ -12,8 +12,6 @@ namespace TP_Integrador
 {
     public class K9 : Operador
     {
-        BateriaOperadores valorBateria;
-        CargaFisicaOperadores valorCargaFisica;
         public K9(string id, int coordX, int coordY, int cargaBateria, int cargaFisica)
             : base(id, coordX, coordY, cargaBateria, cargaFisica)
         {
