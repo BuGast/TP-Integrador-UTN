@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TP_Integrador.clases;
 
 namespace TP_Integrador
 {
@@ -60,6 +61,49 @@ namespace TP_Integrador
         public void VerificarEstado()
         {
             //este método se fija si está en espera, disponible, etc
+        }
+
+        public void Mover(int x, int y, Mapa mapa)
+        {
+            int xActual = this.coordX; // Obtener la posición actual del operador
+            int yActual = this.coordY;
+            int xDestino = x; // Obtener la coordenada de destino
+            int yDestino = y;
+
+            // Verifico si la coordenada de destino es válida en relación con la posición actual del operador
+            if (xDestino >= 0 && xDestino <= mapa.getTamanioMapaKm2() && //me fijo que xDestino sea >=0 y que sea < que el valor máximo de la coord en X del mapa
+                yDestino >= 0 && yDestino <= mapa.getTamanioMapaKm2())
+            {
+                while (xActual != xDestino || yActual != yDestino)
+                {
+                    if (xActual < xDestino)
+                    {
+                        xActual++;
+                        
+                    }
+                    else if (xActual > xDestino)
+                    {
+                        xActual--;
+                    }
+
+                    if (yActual < yDestino)
+                    {
+                        yActual++;
+                    }
+                    else if (yActual > yDestino)
+                    {
+                        yActual--;
+                    }
+
+                    // Actualizo la coordenada actual del operador
+                    /*                    coordActual[xActual, yActual];*/
+                    // Aquí podría poner luego una función que analice el terreno en el que está y en base a eso ejecute alguna funcionalidad (tp2)
+                }
+            }
+            else
+            {
+                Console.WriteLine("La coordenada de destino no es válida");
+            }
         }
 
         public void MostrarDetallesOperador()

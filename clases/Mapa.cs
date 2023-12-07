@@ -18,6 +18,8 @@ namespace TP_Integrador.clases
         private TiposZonas[,] terrenos;
         private Random random;
 
+        public int getTamanioMapaKm2() { return TamanioMapaKm2; }
+
         // Decidimos que solo en estas localizaciones se puedan crear cuarteles
         private List<TiposZonas> LocalizacionesAptasParaCuartel = new List<TiposZonas>
         {
