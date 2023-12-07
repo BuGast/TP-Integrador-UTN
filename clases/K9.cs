@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Gastón Camú, Alicia Nazar
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +14,8 @@ namespace TP_Integrador
     {
         BateriaOperadores valorBateria;
         CargaFisicaOperadores valorCargaFisica;
-        public K9()
-            : base()
+        public K9(string id, int coordX, int coordY)
+            : base(id, coordX, coordY)
         {
             if (Enum.TryParse(BateriaOperadores.K9.ToString(), out valorBateria))
             {

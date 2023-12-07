@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Gastón Camú, Alicia Nazar
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -13,8 +15,8 @@ namespace TP_Integrador
         BateriaOperadores valorBateria;
         CargaFisicaOperadores valorCargaFisica;
 
-        public UAV()
-            : base()
+        public UAV(string id,int coordX, int coordY)
+            : base(id, coordX, coordY)
         {
             if (Enum.TryParse(BateriaOperadores.UAV.ToString(), out valorBateria))
             {

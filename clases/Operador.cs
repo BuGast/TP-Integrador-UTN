@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Gastón Camú, Alicia Nazar
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +28,6 @@ namespace TP_Integrador
             this.coordX = coordX;
             this.coordY = coordY;
         }
-
         public void ComprobarBateriaActual()
         {
             Console.WriteLine("carga maxima: " + bateria.MostrarCargaMaxima());

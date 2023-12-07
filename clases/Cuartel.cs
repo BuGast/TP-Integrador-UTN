@@ -1,4 +1,4 @@
-// GUSTAVO MARTIN CANTARELLA
+// Gastón Camú, Alicia Nazar
 
 using System;
 using System.Collections.Generic;
@@ -46,22 +46,20 @@ namespace TP_Integrador.clases
 
             for (int i = 1; i <= cantOperadores; i++)
             {
+                string idOperador = "C" + this.id +"-"+ operadores.Count().ToString();
                 Operador operador = null;
                 if (seleccionUsuario == 1)
                 {
-                    operador = new UAV();
-                    operador.id = operadores.Count().ToString();
+                    operador = new UAV(idOperador, this.coordX, this.coordY);
 
                 }
                 else if (seleccionUsuario == 2)
                 {
-                    operador = new K9();
-                    operador.id = operadores.Count().ToString();
+                    operador = new K9(idOperador, this.coordX, this.coordY);
                 }                                               
                 else if (seleccionUsuario == 3)                 
                 {                                               
-                    operador = new M8();                        
-                    operador.id = operadores.Count().ToString();
+                    operador = new M8(idOperador, this.coordX, this.coordY);                        
                 }
                 else
                 {
