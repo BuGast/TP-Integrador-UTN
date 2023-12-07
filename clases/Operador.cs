@@ -35,20 +35,15 @@ namespace TP_Integrador
 
         public void TransferirCargaFisica(Operador operador2, int carga)
         {
-            if (operador2.cargaMaxima >= this.cargaMaxima) 
+            if (operador2.cargaFisicaMaxima >= this.cargaFisicaMaxima) 
             {
-                operador2.cargaActual = this.cargaActual;
-                this.cargaActual = 0;
+                operador2.cargaFisicaActual = this.cargaFisicaActual;
+                this.cargaFisicaActual = 0;
             }
             else
             {
                 Console.WriteLine("error el operador no puede levantar la carga");
             }
-        }
-
-        public void CargarBateria(Operador operador)
-        {
-            operador.bateria.RecargarBateria((bateria.MostrarCargaMaxima() - bateria.MostrarCargaActual()));
         }
 
         public void VerificarProximidadConOperador()
@@ -59,13 +54,6 @@ namespace TP_Integrador
         {
             //este método se fija si está en espera, disponible, etc
         }
-        public void CambiarPosicionACuartel((int x, int y) coordenadasCuartel)
-        {
-            this.coordActual = new int[,] { { coordenadasCuartel.x, coordenadasCuartel.y } };
-        }
-
-        public abstract void Mover(int[,] coordDeDestino, int[,] coordMapa);
-
 
         public void MostrarDetallesOperador()
         {
