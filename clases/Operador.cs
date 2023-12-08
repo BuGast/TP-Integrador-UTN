@@ -63,14 +63,16 @@ namespace TP_Integrador
             }
         }
 
-        public void VerificarProximidadConOperador()
+        public bool VerificarProximidadConOperador(Operador operador2)
         {
+            bool operadorCerca = false;
+            if (operador2.coordX==this.coordX && operador2.coordY == this.coordY)
+            {
+                operadorCerca= true;
+            }
+            return operadorCerca;
+        }
 
-        }
-        public void VerificarEstado()
-        {
-            //este método se fija si está en espera, disponible, etc
-        }
 
         public void Mover(int x, int y, Mapa mapa)
         {
