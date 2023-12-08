@@ -14,18 +14,18 @@ namespace TP_Integrador
 
         private int cargaMaxima;
         private int cargaActual;
-        private bool dañoBateria;
+        private bool bateriaDesconectada;
 
         public Bateria(int cargaMaxima, SimuladorDeDaños simuladorDeDaños)
         {
             this.cargaMaxima = cargaMaxima;
             this.cargaActual = this.cargaMaxima;
-            this.dañoBateria = simuladorDeDaños.BateriaPerforada;
+            this.bateriaDesconectada = simuladorDeDaños.PuertoBateriaDesconectado;
         }
 
         public void CargaYDescargaBateria(int carga, Bateria bateria2)
         {
-            if( dañoBateria == false)
+            if(bateriaDesconectada == false)
             {
                 if (carga > 0 && carga <= bateria2.cargaActual)
                 {

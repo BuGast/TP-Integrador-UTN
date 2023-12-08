@@ -75,14 +75,14 @@ namespace TP_Integrador
             int yActual = this.coordY;
             int xDestino = x; // Obtener la coordenada de destino
             int yDestino = y;
-            int valor = 0;
+            int detener = 0;
             // Verifico si la coordenada de destino es válida en relación con la posición actual del operador
             if (xDestino >= 0 && xDestino <= mapa.getTamanioMapaKm2() && //me fijo que xDestino sea >=0 y que sea < que el valor máximo de la coord en X del mapa
                 yDestino >= 0 && yDestino <= mapa.getTamanioMapaKm2())
             {
-                while ((xActual != xDestino || yActual != yDestino)&&valor==0 && Convert.ToInt32(bateria.getCargaActual) > 0)
+                while ((xActual != xDestino || yActual != yDestino)&& detener ==0 && Convert.ToInt32(bateria.getCargaActual) > 0 )
                 {
-                    if (xActual < xDestino)
+                    if (xActual < xDestino) //podría haberse movido de muchas formas, pero decidimos que esta sea por defecto
                     {
                         xActual++;
                         analizarSituacionDelOperador(xActual,yActual,mapa);
@@ -117,13 +117,13 @@ namespace TP_Integrador
         public int analizarSituacionDelOperador(int xActual, int yActual, Mapa mapa)
         {
             Random randy = new Random();
-            int valor = 0;
+            int detener = 0;
             TiposZonas[,] terreno = mapa.getTerrenos();
             TiposZonas terrenoActual = terreno[xActual, yActual];
             List<TiposZonas> terrenosComunes = mapa.getTerrenosComunes();
             if ((GetType().Name == "K9"|| GetType().Name == "M8") && terrenoActual == TiposZonas.Lago)
             {
-                valor=1;
+                detener=1;
             }
             else if (terrenoActual == TiposZonas.Vertedero)
             {
@@ -140,7 +140,7 @@ namespace TP_Integrador
                     this.bateria.setCargaActual(this.bateria.getCargaMaxima());
                 }
             }
-            return valor;
+            return detener;
         }
 
         public void MostrarDetallesOperador()
