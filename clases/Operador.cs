@@ -222,7 +222,15 @@ namespace TP_Integrador
 
         public void RecogerCargaEnVertedero(Mapa mapa)
         {
-            var posiciones = mapa.BuscarZonaEnElMapa(TiposZonas.Vertedero);
+            (int, int)[] posicionesEncontradas = mapa.BuscarZonaEnElMapa(TiposZonas.Vertedero);
+            (int, int) posicionMasCercana = SeleccionarPosicionMasCercana(this.coordX, this.coordY, posicionesEncontradas);
+            Mover(posicionMasCercana.Item1, posicionMasCercana.Item2, mapa);
+            if (posicionMasCercana.Item1 == this.coordX && posicionMasCercana.Item2 == this.coordY)
+            {
+                this.cargaFisicaActual = this.cargaFisicaMaxima;
+            }
+
+
             //posicion(x,y) = SeleccionarPocisionMasCercana(posiciones);
             //Mover(x,y,mapa);
             //this.cargaActual= this.cargaMaxima;
@@ -231,7 +239,24 @@ namespace TP_Integrador
             //Mover(x,y,mapa)
             //this.cargaActual=0;
         }
+        public (int,int) SeleccionarPosicionMasCercana(int opeCoordX, int opeCoordY, (int, int)[] posicionesEncontradas)
+        {
+            int puntajeMasCerca = 9999999;
+            (int, int) posicionMasCercana = (0, 0);
+            foreach (var posicion in posicionesEncontradas)
+            {
+                int x = posicion.Item1;
+                int y = posicion.Item2;
+                int puntajeDeCercania = (x-opeCoordX) + (y-opeCoordY);
+                if (puntajeDeCercania < puntajeMasCerca)
+                {
+                    puntajeMasCerca = puntajeDeCercania;
+                    posicionMasCercana = (x, y);
+                }
 
+            }
+            return posicionMasCercana;
+        }
         //implementar el método BuscarZonaEnElMapa(TiposZonas tipoZona)
 
 
