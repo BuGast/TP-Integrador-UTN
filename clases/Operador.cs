@@ -218,6 +218,23 @@ namespace TP_Integrador
             else if (this.GetType().Name == "M8") { this.bateria = new Bateria((int)BateriaOperadores.M8, simuladorDeDaños); }
             else { this.bateria = new Bateria((int)BateriaOperadores.K9, simuladorDeDaños); } 
         }
+
+
+        public void RecogerCargaEnVertedero(Mapa mapa)
+        {
+            var posiciones = mapa.BuscarZonaEnElMapa(TiposZonas.Vertedero);
+            //posicion(x,y) = SeleccionarPocisionMasCercana(posiciones);
+            //Mover(x,y,mapa);
+            //this.cargaActual= this.cargaMaxima;
+            //var posiciones = mapa.BuscarZonaEnElMapa(TiposZonas.Reciclaje);
+            //posicion(x,y) = SeleccionarPocisionMasCercana(posiciones);
+            //Mover(x,y,mapa)
+            //this.cargaActual=0;
+        }
+
+        //implementar el método BuscarZonaEnElMapa(TiposZonas tipoZona)
+
+
         public void MostrarDetallesOperador()
         {
             Console.WriteLine(GetType().Name);
