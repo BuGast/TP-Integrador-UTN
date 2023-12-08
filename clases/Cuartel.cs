@@ -81,6 +81,17 @@ namespace TP_Integrador.clases
                 Console.WriteLine("Id: "+operador.getId+": "+operador.getEstado());
             }
         }
+
+        public void TotalRecall(Mapa mapa)
+        {
+            foreach (var operador in operadores)
+            {
+                if (operador.getEstado() != Estado.EnEspera.ToString())
+                {
+                    operador.Mover(this.coordX, this.coordY, mapa);
+                }
+            }
+        }
         public void MostrarEstadoOperadoresEnCiertaLocalizacion(int x, int y)
         {
             foreach (var operador in operadores)
