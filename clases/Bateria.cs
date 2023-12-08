@@ -43,13 +43,21 @@ namespace TP_Integrador
             Console.WriteLine("Se actualizaron los valores de las baterías");
         }
 
-        public int MostrarCargaMaxima()
+        public int getCargaMaxima()
         {
             return cargaMaxima;
         }
-        public int MostrarCargaActual()
+        public int getCargaActual()
         {
             return cargaActual;
+        }
+        public void setCargaMaxima(int cargaMaxima)
+        {
+            this.cargaMaxima = cargaMaxima;
+        }
+        public void setCargaActual(int cargaActual)
+        {
+            this.cargaActual = cargaActual;
         }
 
 

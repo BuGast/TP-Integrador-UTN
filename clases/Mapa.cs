@@ -18,17 +18,17 @@ namespace TP_Integrador.clases
         private TiposZonas[,] terrenos;
         private Random random;
 
-        public int getTamanioMapaKm2() { return TamanioMapaKm2; }
 
         // Decidimos que solo en estas localizaciones se puedan crear cuarteles
-        private List<TiposZonas> LocalizacionesAptasParaCuartel = new List<TiposZonas>
+        private List<TiposZonas> terrenosComunes = new List<TiposZonas>
         {
             TiposZonas.TerrenoBaldio,
             TiposZonas.Planicie,
             TiposZonas.Bosque,
             TiposZonas.SectorUrbano
         };
-
+        public int getTamanioMapaKm2() { return TamanioMapaKm2; }
+        public List<TiposZonas> getTerrenosComunes() { return terrenosComunes; }
         public Mapa()
         {
             terrenos = new TiposZonas[TamanioMapaKm2, TamanioMapaKm2];
@@ -78,7 +78,7 @@ namespace TP_Integrador.clases
                 int x = random.Next(TamanioMapaKm2);
                 int y = random.Next(TamanioMapaKm2);
 
-                if (LocalizacionesAptasParaCuartel.Contains(terrenos[x,y]))
+                if (terrenosComunes.Contains(terrenos[x,y]))
                 {
                     terrenos[x, y] = TiposZonas.Cuartel;
                     cuartelesGenerados++;

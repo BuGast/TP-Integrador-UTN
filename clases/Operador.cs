@@ -35,10 +35,12 @@ namespace TP_Integrador
         public string getId(){ return id; }
         public int getCoordX(){ return this.coordX; }
         public int getCoordY() { return this.coordY;}
+        public int getVelocidadOptima() {  return velocidadOptima; }
+        public void setVelocidadOptima(int velocidadOptima) { this.velocidadOptima = velocidadOptima; }
         public void ComprobarBateriaActual()
         {
-            Console.WriteLine("carga maxima: " + bateria.MostrarCargaMaxima());
-            Console.WriteLine("carga actual: " + bateria.MostrarCargaActual());
+            Console.WriteLine("carga maxima: " + bateria.getCargaMaxima());
+            Console.WriteLine("carga actual: " + bateria.getCargaActual());
         }
 
         public void TransferirCargaFisica(Operador operador2, int carga)
@@ -74,28 +76,28 @@ namespace TP_Integrador
             if (xDestino >= 0 && xDestino <= mapa.getTamanioMapaKm2() && //me fijo que xDestino sea >=0 y que sea < que el valor máximo de la coord en X del mapa
                 yDestino >= 0 && yDestino <= mapa.getTamanioMapaKm2())
             {
-                while ((xActual != xDestino || yActual != yDestino)&&valor==0)
+                while ((xActual != xDestino || yActual != yDestino)&&valor==0 && Convert.ToInt32(bateria.getCargaActual) > 0)
                 {
                     if (xActual < xDestino)
                     {
                         xActual++;
-                        analizarSituacionDelOperador(xActual,yActual,mapa.getTerrenos());
+                        analizarSituacionDelOperador(xActual,yActual,mapa);
                     }
                     else if (xActual > xDestino)
                     {
                         xActual--;
-                        analizarSituacionDelOperador(xActual,yActual, mapa.getTerrenos());
+                        analizarSituacionDelOperador(xActual,yActual, mapa);
                     }
 
                     if (yActual < yDestino)
                     {
                         yActual++;
-                        analizarSituacionDelOperador(xActual,yActual, mapa.getTerrenos());
+                        analizarSituacionDelOperador(xActual,yActual, mapa);
                     }
                     else if (yActual > yDestino)
                     {
                         yActual--;
-                        analizarSituacionDelOperador(xActual,yActual, mapa.getTerrenos());
+                        analizarSituacionDelOperador(xActual,yActual, mapa);
                     }
                 }
                 // Actualizo la coordenada actual del operador
@@ -108,13 +110,31 @@ namespace TP_Integrador
             }
         }
 
-        public int analizarSituacionDelOperador(int xActual,int yActual, TiposZonas[,] terrenos)
+        public int analizarSituacionDelOperador(int xActual, int yActual, Mapa mapa)
         {
+            Random randy = new Random();
             int valor = 0;
-            TiposZonas terrenoActual = terrenos[xActual,yActual];
+            TiposZonas[,] terreno = mapa.getTerrenos();
+            TiposZonas terrenoActual = terreno[xActual, yActual];
+            List<TiposZonas> terrenosComunes = mapa.getTerrenosComunes();
             if ((GetType().Name == "K9"|| GetType().Name == "M8") && terrenoActual == TiposZonas.Lago)
             {
                 valor=1;
+            }
+            else if (terrenoActual == TiposZonas.Vertedero)
+            {
+                int probabilidad = randy.Next(0, 101);
+                if (probabilidad <= 5)
+                { 
+                }
+            }
+            else if (terrenoActual == TiposZonas.VertederoElectronico)
+            {
+                this.bateria.setCargaMaxima(Convert.ToInt32(bateria.getCargaMaxima() * 0.8));
+                if (this.bateria.getCargaActual() > this.bateria.getCargaMaxima())
+                {
+                    this.bateria.setCargaActual(this.bateria.getCargaMaxima());
+                }
             }
             return valor;
         }
@@ -129,8 +149,8 @@ namespace TP_Integrador
             Console.WriteLine("coordenada actual: (" + this.coordX+" - "+this.coordY+")");
             Console.WriteLine("");
             Console.WriteLine("BATERIA");
-            Console.WriteLine("carga maxima: " + bateria.MostrarCargaMaxima() + " mAh");
-            Console.WriteLine("carga actual: " + bateria.MostrarCargaActual() + " mAh");
+            Console.WriteLine("carga maxima: " + bateria.getCargaMaxima() + " mAh");
+            Console.WriteLine("carga actual: " + bateria.getCargaActual() + " mAh");
             Console.WriteLine("---------------------------------------------------------");
 
         }
