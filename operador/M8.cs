@@ -3,21 +3,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using TP_Integrador.clases;
 
-namespace TP_Integrador
+namespace TP_Integrador.operador
 {
-    public class UAV : Operador
+    public class M8 : Operador
     {
-
-        public UAV(string id,int coordX, int coordY, int cargaBateria, int cargaFisica)
+        public M8(string id, int coordX, int coordY, int cargaBateria, int cargaFisica)
             : base(id, coordX, coordY, cargaBateria, cargaFisica)
         {
+
+
         }
-
-
     }
+
 }

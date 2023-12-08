@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TP_Integrador.clases;
+using TP_Integrador.enums;
+using TP_Integrador.mapa;
+using TP_Integrador.simulador_daño;
 
-namespace TP_Integrador
+namespace TP_Integrador.operador
 {
     public abstract class Operador
     {
@@ -22,26 +24,26 @@ namespace TP_Integrador
         int coordY;
         bool dañado;
         SimuladorDeDaños simuladorDeDaños = new SimuladorDeDaños();
-        public Operador(string id,int coordX, int coordY, int cargaBateria, int cargaFisica)
+        public Operador(string id, int coordX, int coordY, int cargaBateria, int cargaFisica)
         {
             this.id = id;
-            this.bateria = new Bateria(cargaBateria, simuladorDeDaños);
-            this.estado = Estado.EnEspera.ToString();
-            this.cargaFisicaMaxima = cargaFisica;
-            this.velocidadOptima = 1;
+            bateria = new Bateria(cargaBateria, simuladorDeDaños);
+            estado = Estado.EnEspera.ToString();
+            cargaFisicaMaxima = cargaFisica;
+            velocidadOptima = 1;
             this.coordX = coordX;
             this.coordY = coordY;
         }
-        
-        public string getEstado(){ return estado; }
-        public string getId(){ return id; }
-        public int getCoordX(){ return this.coordX; }
-        public int getCoordY() { return this.coordY;}
-        public int getVelocidadOptima() {  return velocidadOptima; }
-        public bool getEstadoDañado() { return this.dañado; }
+
+        public string getEstado() { return estado; }
+        public string getId() { return id; }
+        public int getCoordX() { return coordX; }
+        public int getCoordY() { return coordY; }
+        public int getVelocidadOptima() { return velocidadOptima; }
+        public bool getEstadoDañado() { return dañado; }
         public void setVelocidadOptima(int velocidadOptima) { this.velocidadOptima = velocidadOptima; }
-        public void setEstadoDañado(bool estadoDañado) { this.dañado=estadoDañado; }
-        public void setEstado(string Estado) { this.estado = Estado; }
+        public void setEstadoDañado(bool estadoDañado) { dañado = estadoDañado; }
+        public void setEstado(string Estado) { estado = Estado; }
         public void ComprobarBateriaActual()
         {
             Console.WriteLine("carga maxima: " + bateria.getCargaMaxima());
@@ -52,10 +54,10 @@ namespace TP_Integrador
         {
             if (simuladorDeDaños.ServoAtascado == false)
             {
-                if (operador2.cargaFisicaMaxima >= this.cargaFisicaMaxima)
+                if (operador2.cargaFisicaMaxima >= cargaFisicaMaxima)
                 {
-                    operador2.cargaFisicaActual = this.cargaFisicaActual;
-                    this.cargaFisicaActual = 0;
+                    operador2.cargaFisicaActual = cargaFisicaActual;
+                    cargaFisicaActual = 0;
                 }
                 else
                 {
@@ -67,9 +69,9 @@ namespace TP_Integrador
         public bool VerificarProximidadConOperador(Operador operador2)
         {
             bool operadorCerca = false;
-            if (operador2.coordX==this.coordX && operador2.coordY == this.coordY)
+            if (operador2.coordX == coordX && operador2.coordY == coordY)
             {
-                operadorCerca= true;
+                operadorCerca = true;
             }
             return operadorCerca;
         }
@@ -88,24 +90,24 @@ namespace TP_Integrador
                     cargaValida = ValidarCargaSinExceso(carga, operador2.bateria);
                 }
                 while (!cargaValida);
-                
-                this.bateria.CargaYDescargaBateria(carga,operador2.bateria );
+
+                bateria.CargaYDescargaBateria(carga, operador2.bateria);
             }
         }
         public bool ValidarCargaSinExceso(int carga, Bateria bateria)
         {
             bool cargaValida = false;
-            if ( carga< Convert.ToInt32(bateria.getCargaActual) )
+            if (carga < Convert.ToInt32(bateria.getCargaActual))
             {
-                cargaValida= true;
+                cargaValida = true;
             }
             return cargaValida;
         }
 
         public void Mover(int x, int y, Mapa mapa)
         {
-            int xActual = this.coordX; // Obtener la posición actual del operador
-            int yActual = this.coordY;
+            int xActual = coordX; // Obtener la posición actual del operador
+            int yActual = coordY;
             int xDestino = x; // Obtener la coordenada de destino
             int yDestino = y;
             int detener = 0;
@@ -114,13 +116,13 @@ namespace TP_Integrador
                 yDestino >= 0 && yDestino <= mapa.getTamanioMapaKm2())
             {
                 int contadorBateria = 0;
-                while ((xActual != xDestino || yActual != yDestino)&& detener ==0 && Convert.ToInt32(bateria.getCargaActual) > 0 )
+                while ((xActual != xDestino || yActual != yDestino) && detener == 0 && Convert.ToInt32(bateria.getCargaActual) > 0)
                 {
                     if (xActual < xDestino) //podría haberse movido de muchas formas, pero decidimos que esta sea por defecto
                     {
                         xActual++;
                         contadorBateria++;
-                        analizarSituacionDelOperador(xActual,yActual,mapa);
+                        analizarSituacionDelOperador(xActual, yActual, mapa);
                         DisminucionDeBateria();
                         contadorBateria = ReduccionDeVelocidad(contadorBateria);
                     }
@@ -128,7 +130,7 @@ namespace TP_Integrador
                     {
                         xActual--;
                         contadorBateria++;
-                        analizarSituacionDelOperador(xActual,yActual, mapa);
+                        analizarSituacionDelOperador(xActual, yActual, mapa);
                         DisminucionDeBateria();
                     }
 
@@ -136,21 +138,21 @@ namespace TP_Integrador
                     {
                         yActual++;
                         contadorBateria++;
-                        analizarSituacionDelOperador(xActual,yActual, mapa);
+                        analizarSituacionDelOperador(xActual, yActual, mapa);
                         DisminucionDeBateria();
                     }
                     else if (yActual > yDestino)
                     {
                         yActual--;
                         contadorBateria++;
-                        analizarSituacionDelOperador(xActual,yActual, mapa);
+                        analizarSituacionDelOperador(xActual, yActual, mapa);
                         DisminucionDeBateria();
-                        
+
                     }
                 }
                 // Actualizo la coordenada actual del operador
-                this.coordX = xActual;
-                this.coordY = yActual;
+                coordX = xActual;
+                coordY = yActual;
             }
             else
             {
@@ -163,18 +165,18 @@ namespace TP_Integrador
         {
             if (simuladorDeDaños.BateriaPerforada == true)
             {
-                this.bateria.setCargaActual(this.bateria.getCargaActual() - (1 * 500));
+                bateria.setCargaActual(bateria.getCargaActual() - 1 * 500);
             }
             else
             {
-                this.bateria.setCargaActual(this.bateria.getCargaActual() - 1);
+                bateria.setCargaActual(bateria.getCargaActual() - 1);
             }
         }
 
         public int ReduccionDeVelocidad(int contadorBateria)
         {
-            int valor = this.bateria.getCargaMaxima() / 10;
-            if (contadorBateria == valor )
+            int valor = bateria.getCargaMaxima() / 10;
+            if (contadorBateria == valor)
             {
                 contadorBateria = 0;
                 velocidadOptima = Convert.ToInt32(velocidadOptima * 0.95);
@@ -190,9 +192,9 @@ namespace TP_Integrador
             TiposZonas terrenoActual = terreno[xActual, yActual];
             List<TiposZonas> terrenosComunes = mapa.getTerrenosComunes();
             int probabilidadDaño = randy.Next(0, 101);
-            if ((GetType().Name == "K9"|| GetType().Name == "M8") && terrenoActual == TiposZonas.Lago)
+            if ((GetType().Name == "K9" || GetType().Name == "M8") && terrenoActual == TiposZonas.Lago)
             {
-                detener=1;
+                detener = 1;
             }
             else if (terrenoActual == TiposZonas.Vertedero && probabilidadDaño <= 5)
             {
@@ -220,10 +222,10 @@ namespace TP_Integrador
             }
             else if (terrenoActual == TiposZonas.VertederoElectronico)
             {
-                this.bateria.setCargaMaxima(Convert.ToInt32(bateria.getCargaMaxima() * 0.8));
-                if (this.bateria.getCargaActual() > this.bateria.getCargaMaxima())
+                bateria.setCargaMaxima(Convert.ToInt32(bateria.getCargaMaxima() * 0.8));
+                if (bateria.getCargaActual() > bateria.getCargaMaxima())
                 {
-                    this.bateria.setCargaActual(this.bateria.getCargaMaxima());
+                    bateria.setCargaActual(bateria.getCargaMaxima());
                 }
             }
             return detener;
@@ -231,39 +233,39 @@ namespace TP_Integrador
 
         public void ResetearValoresOriginales()
         {
-            int cargaFisica=this.cargaFisicaActual;
-            int cargaBateria=this.bateria.getCargaActual();
-            if (this.GetType().Name == "UAV") { cargaFisica = (int)CargaFisicaOperadores.UAV; cargaBateria = (int)BateriaOperadores.UAV; }
-            if (this.GetType().Name == "M8") { cargaFisica = (int)CargaFisicaOperadores.M8; cargaBateria = (int)BateriaOperadores.M8; }
-            if (this.GetType().Name == "K9") { cargaFisica = (int)CargaFisicaOperadores.K9; cargaBateria = (int)BateriaOperadores.K9; }
+            int cargaFisica = cargaFisicaActual;
+            int cargaBateria = bateria.getCargaActual();
+            if (GetType().Name == "UAV") { cargaFisica = (int)CargaFisicaOperadores.UAV; cargaBateria = (int)BateriaOperadores.UAV; }
+            if (GetType().Name == "M8") { cargaFisica = (int)CargaFisicaOperadores.M8; cargaBateria = (int)BateriaOperadores.M8; }
+            if (GetType().Name == "K9") { cargaFisica = (int)CargaFisicaOperadores.K9; cargaBateria = (int)BateriaOperadores.K9; }
 
 
             SimuladorDeDaños simuladorDeDaños = new SimuladorDeDaños();
-            this.bateria = new Bateria(cargaBateria, simuladorDeDaños);
-            this.estado = Estado.EnEspera.ToString();
-            this.cargaFisicaMaxima = cargaFisica;
-            this.velocidadOptima = 1;
+            bateria = new Bateria(cargaBateria, simuladorDeDaños);
+            estado = Estado.EnEspera.ToString();
+            cargaFisicaMaxima = cargaFisica;
+            velocidadOptima = 1;
         }
         public void RemplazarBateria()
         {
-            if (this.GetType().Name == "UAV") { this.bateria = new Bateria((int)BateriaOperadores.UAV, simuladorDeDaños); }
-            else if (this.GetType().Name == "M8") { this.bateria = new Bateria((int)BateriaOperadores.M8, simuladorDeDaños); }
-            else { this.bateria = new Bateria((int)BateriaOperadores.K9, simuladorDeDaños); } 
+            if (GetType().Name == "UAV") { bateria = new Bateria((int)BateriaOperadores.UAV, simuladorDeDaños); }
+            else if (GetType().Name == "M8") { bateria = new Bateria((int)BateriaOperadores.M8, simuladorDeDaños); }
+            else { bateria = new Bateria((int)BateriaOperadores.K9, simuladorDeDaños); }
         }
 
 
         public void RecogerCargaEnVertedero(Mapa mapa)
         {
             (int, int)[] posicionesEncontradas = mapa.BuscarZonaEnElMapa(TiposZonas.Vertedero);
-            (int, int) posicionMasCercana = SeleccionarPosicionMasCercana(this.coordX, this.coordY, posicionesEncontradas);
+            (int, int) posicionMasCercana = SeleccionarPosicionMasCercana(coordX, coordY, posicionesEncontradas);
             Mover(posicionMasCercana.Item1, posicionMasCercana.Item2, mapa);
-            if (posicionMasCercana.Item1 == this.coordX && posicionMasCercana.Item2 == this.coordY)
+            if (posicionMasCercana.Item1 == coordX && posicionMasCercana.Item2 == coordY)
             {
-                this.cargaFisicaActual = this.cargaFisicaMaxima;
+                cargaFisicaActual = cargaFisicaMaxima;
             }
 
         }
-        public (int,int) SeleccionarPosicionMasCercana(int opeCoordX, int opeCoordY, (int, int)[] posicionesEncontradas)
+        public (int, int) SeleccionarPosicionMasCercana(int opeCoordX, int opeCoordY, (int, int)[] posicionesEncontradas)
         {
             int puntajeMasCerca = 9999999;
             (int, int) posicionMasCercana = (0, 0);
@@ -271,7 +273,7 @@ namespace TP_Integrador
             {
                 int x = posicion.Item1;
                 int y = posicion.Item2;
-                int puntajeDeCercania = Math.Abs(x-opeCoordX) + Math.Abs(y-opeCoordY);
+                int puntajeDeCercania = Math.Abs(x - opeCoordX) + Math.Abs(y - opeCoordY);
                 if (puntajeDeCercania < puntajeMasCerca)
                 {
                     puntajeMasCerca = puntajeDeCercania;
@@ -289,7 +291,7 @@ namespace TP_Integrador
             Console.WriteLine("estado: " + estado);
             Console.WriteLine("cargaMaxima: " + cargaFisicaMaxima + " kg");
             Console.WriteLine("velocidad optima: " + velocidadOptima);
-            Console.WriteLine("coordenada actual: (" + this.coordX+" - "+this.coordY+")");
+            Console.WriteLine("coordenada actual: (" + coordX + " - " + coordY + ")");
             Console.WriteLine("");
             Console.WriteLine("BATERIA");
             Console.WriteLine("carga maxima: " + bateria.getCargaMaxima() + " mAh");

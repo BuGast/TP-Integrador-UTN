@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TP_Integrador.clases
+namespace TP_Integrador.enums
 {
-    internal enum BateriaOperadores
+    internal enum CargaFisicaOperadores
     {
-        UAV = 4000,
-        K9 = 6500,
-        M8 = 12250
+        UAV = 5,
+        K9 = 40,
+        M8 = 250
     }
 }

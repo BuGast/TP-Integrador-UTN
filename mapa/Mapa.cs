@@ -8,8 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using TP_Integrador.clases;
+using TP_Integrador.enums;
+using TP_Integrador.operador;
 
-namespace TP_Integrador.clases
+namespace TP_Integrador.mapa
 {
     [Serializable]
     public class Mapa
@@ -33,7 +36,7 @@ namespace TP_Integrador.clases
         };
         public void setTamanioMapaKm2(int tamanioMapa)
         {
-            this.TamanioMapaKm2 = tamanioMapa;
+            TamanioMapaKm2 = tamanioMapa;
         }
         public void setTerrenos(TiposZonas[,] terrenos)
         {
@@ -41,8 +44,8 @@ namespace TP_Integrador.clases
         }
         public void setOperadores(List<Operador> operadores)
         {
-            this.listaDeOperadores.Clear();
-            this.listaDeOperadores.AddRange(operadores);
+            listaDeOperadores.Clear();
+            listaDeOperadores.AddRange(operadores);
         }
 
         public int getTamanioMapaKm2() { return TamanioMapaKm2; }
@@ -53,7 +56,7 @@ namespace TP_Integrador.clases
 
         public void AgregarOperadorAlMapa()
         {
-            foreach( var cuartel in listaDeCuarteles)
+            foreach (var cuartel in listaDeCuarteles)
             {
                 foreach (var op in cuartel.operadores)
                 {
@@ -71,7 +74,7 @@ namespace TP_Integrador.clases
             GenerarCuarteles();
         }
 
-        public TiposZonas[,] getTerrenos() { return  terrenos; }
+        public TiposZonas[,] getTerrenos() { return terrenos; }
         private void GenerarMapa()
         {
             for (int x = 0; x < TamanioMapaKm2; x++)
@@ -85,7 +88,7 @@ namespace TP_Integrador.clases
 
         private TiposZonas GenerarTerrenoAleatorio()
         {
-            int maximoSitioReciclaje = random.Next(1,6);
+            int maximoSitioReciclaje = random.Next(1, 6);
             int contadorSitioReciclaje = 0;
             double probabilidad = random.NextDouble();
             TiposZonas zona = TiposZonas.TerrenoBaldio;
@@ -93,7 +96,7 @@ namespace TP_Integrador.clases
             else if (probabilidad < 0.2 && contadorSitioReciclaje < maximoSitioReciclaje)
             {
                 zona = TiposZonas.SitioReciclaje;
-                contadorSitioReciclaje++; 
+                contadorSitioReciclaje++;
             }
             else if (probabilidad < 0.3) { zona = TiposZonas.Lago; }
             else if (probabilidad < 0.4) { zona = TiposZonas.Bosque; }
@@ -111,11 +114,11 @@ namespace TP_Integrador.clases
                 int x = random.Next(TamanioMapaKm2);
                 int y = random.Next(TamanioMapaKm2);
 
-                if (terrenosComunes.Contains(terrenos[x,y]))
+                if (terrenosComunes.Contains(terrenos[x, y]))
                 {
                     terrenos[x, y] = TiposZonas.Cuartel;
                     cuartelesGenerados++;
-                    listaDeCuarteles.Add(new Cuartel(cuartelesGenerados.ToString(),x, y));
+                    listaDeCuarteles.Add(new Cuartel(cuartelesGenerados.ToString(), x, y));
                 }
             }
         }
@@ -161,11 +164,11 @@ namespace TP_Integrador.clases
 
         public (int, int)[] BuscarZonaEnElMapa(TiposZonas zonaBuscada)
         {
-            int filas = this.terrenos.GetLength(0);
-            int columnas = this.terrenos.GetLength(1);
+            int filas = terrenos.GetLength(0);
+            int columnas = terrenos.GetLength(1);
             var posiciones = Enumerable.Range(0, filas)
                 .SelectMany(fila => Enumerable.Range(0, columnas).Select(columna => (fila, columna)))
-                .Where(p => this.terrenos[p.Item1, p.Item2] == zonaBuscada)
+                .Where(p => terrenos[p.Item1, p.Item2] == zonaBuscada)
                 .ToArray();
 
             return posiciones;
@@ -175,7 +178,7 @@ namespace TP_Integrador.clases
 
 
 
-        
+
         public string SerializarMapa()
         {
             SerializacionMapa mapaEjemplo = new SerializacionMapa(TamanioMapaKm2, terrenos, listaDeOperadores);

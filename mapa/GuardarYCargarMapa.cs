@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace TP_Integrador.clases
+namespace TP_Integrador.mapa
 {
     public class GuardarYCargarMapa
     {
@@ -13,7 +13,7 @@ namespace TP_Integrador.clases
         public void GuardarMapa()
         {
             bool sinGuardar = true;
-            while(sinGuardar)
+            while (sinGuardar)
             {
                 try
                 {

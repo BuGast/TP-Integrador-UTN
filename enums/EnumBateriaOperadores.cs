@@ -6,11 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TP_Integrador
+namespace TP_Integrador.enums
 {
-    internal enum Estado
+    internal enum BateriaOperadores
     {
-        Ocupado,
-        EnEspera //listo para cualquier acción,STANDBY, No acepta comandos generales
+        UAV = 4000,
+        K9 = 6500,
+        M8 = 12250
     }
 }

@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TP_Integrador.clases;
+using TP_Integrador.simulador_daño;
 
-namespace TP_Integrador
+namespace TP_Integrador.operador
 {
     public class Bateria
     {
@@ -19,25 +19,25 @@ namespace TP_Integrador
         public Bateria(int cargaMaxima, SimuladorDeDaños simuladorDeDaños)
         {
             this.cargaMaxima = cargaMaxima;
-            this.cargaActual = this.cargaMaxima;
-            this.bateriaDesconectada = simuladorDeDaños.PuertoBateriaDesconectado;
+            cargaActual = this.cargaMaxima;
+            bateriaDesconectada = simuladorDeDaños.PuertoBateriaDesconectado;
         }
 
         public void CargaYDescargaBateria(int carga, Bateria bateria2)
         {
-            if(bateriaDesconectada == false)
+            if (bateriaDesconectada == false)
             {
                 if (carga > 0 && carga <= bateria2.cargaActual)
                 {
-                    if ((carga + this.cargaActual) <= this.cargaMaxima)
+                    if (carga + cargaActual <= cargaMaxima)
                     {
-                        this.cargaActual += carga;
+                        cargaActual += carga;
                         bateria2.cargaActual -= carga;
                     }
                     else
                     {
-                        bateria2.cargaActual -= this.cargaActual - this.cargaMaxima;
-                        this.cargaActual = this.cargaMaxima;
+                        bateria2.cargaActual -= cargaActual - cargaMaxima;
+                        cargaActual = cargaMaxima;
                     }
                 }
                 Console.WriteLine("Se actualizaron los valores de las baterías");

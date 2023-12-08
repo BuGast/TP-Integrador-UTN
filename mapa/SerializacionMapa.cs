@@ -7,8 +7,10 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using TP_Integrador.enums;
+using TP_Integrador.operador;
 
-namespace TP_Integrador.clases
+namespace TP_Integrador.mapa
 {
     [Serializable]
     public class SerializacionMapa

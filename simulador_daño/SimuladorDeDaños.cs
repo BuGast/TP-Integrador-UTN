@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TP_Integrador.operador;
 
-namespace TP_Integrador.clases
+namespace TP_Integrador.simulador_daño
 {
     public class SimuladorDeDaños
     {

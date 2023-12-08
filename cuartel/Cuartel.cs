@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TP_Integrador.clases;
+using TP_Integrador.enums;
+using TP_Integrador.mapa;
+using TP_Integrador.operador;
 
 namespace TP_Integrador.clases
 {
