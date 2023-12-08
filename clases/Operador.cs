@@ -157,36 +157,33 @@ namespace TP_Integrador
             TiposZonas[,] terreno = mapa.getTerrenos();
             TiposZonas terrenoActual = terreno[xActual, yActual];
             List<TiposZonas> terrenosComunes = mapa.getTerrenosComunes();
+            int probabilidadDaño = randy.Next(0, 101);
             if ((GetType().Name == "K9"|| GetType().Name == "M8") && terrenoActual == TiposZonas.Lago)
             {
                 detener=1;
             }
-            int probabilidadDaño = randy.Next(0, 101);
-            else if (terrenoActual == TiposZonas.Vertedero)
+            else if (terrenoActual == TiposZonas.Vertedero && probabilidadDaño <= 5)
             {
-                if (probabilidadDaño <= 5)
+                int probabilidadSimuladorDaño = randy.Next(0, 101);
+                if (probabilidadSimuladorDaño <= 20)
                 {
-                    int probabilidadSimuladorDaño = randy.Next(0, 101);
-                    if (probabilidadSimuladorDaño <= 20)
-                    {
-                        simuladorDeDaños.SimularBateriaPerforada(this);
-                    }
-                    else if (probabilidadSimuladorDaño <= 40)
-                    {
-                        simuladorDeDaños.SimularServoAtascado(this);
-                    }
-                    else if (probabilidadSimuladorDaño <= 60)
-                    {
-                        simuladorDeDaños.SimularMotorComprometido(this);
-                    }
-                    else if (probabilidadSimuladorDaño <= 80)
-                    {
-                        simuladorDeDaños.SimularPuertoBateriaDesconectado(this);
-                    }
-                    else
-                    {
-                        simuladorDeDaños.SimularPinturaRayada(this);
-                    }
+                    simuladorDeDaños.SimularBateriaPerforada(this);
+                }
+                else if (probabilidadSimuladorDaño <= 40)
+                {
+                    simuladorDeDaños.SimularServoAtascado(this);
+                }
+                else if (probabilidadSimuladorDaño <= 60)
+                {
+                    simuladorDeDaños.SimularMotorComprometido(this);
+                }
+                else if (probabilidadSimuladorDaño <= 80)
+                {
+                    simuladorDeDaños.SimularPuertoBateriaDesconectado(this);
+                }
+                else
+                {
+                    simuladorDeDaños.SimularPinturaRayada(this);
                 }
             }
             else if (terrenoActual == TiposZonas.VertederoElectronico)
@@ -214,6 +211,12 @@ namespace TP_Integrador
             this.estado = Estado.EnEspera.ToString();
             this.cargaFisicaMaxima = cargaFisica;
             this.velocidadOptima = 1;
+        }
+        public void RemplazarBateria()
+        {
+            if (this.GetType().Name == "UAV") { this.bateria = new Bateria((int)BateriaOperadores.UAV, simuladorDeDaños); }
+            else if (this.GetType().Name == "M8") { this.bateria = new Bateria((int)BateriaOperadores.M8, simuladorDeDaños); }
+            else { this.bateria = new Bateria((int)BateriaOperadores.K9, simuladorDeDaños); } 
         }
         public void MostrarDetallesOperador()
         {
