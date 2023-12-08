@@ -11,6 +11,6 @@ namespace TP_Integrador
     internal enum Estado
     {
         Ocupado,
-        EnEspera //listo para cualquier acción
+        EnEspera //listo para cualquier acción,STANDBY, No acepta comandos generales
     }
 }

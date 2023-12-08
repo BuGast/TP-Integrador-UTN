@@ -97,14 +97,20 @@ namespace TP_Integrador.clases
         {
             foreach (var operador in operadores)
             {
-                if (operador.getEstadoDañado())
+                if (operador.getEstadoDañado() && operador.getEstado() != Estado.EnEspera.ToString())
                 {
                     operador.Mover(this.coordX, this.coordY, mapa);
                     operador.ResetearValoresOriginales();
                 }
             }
         }
-
+        public void CambiarEstadoOperador()
+        {
+            foreach (var operador in operadores)
+            {
+                operador.setEstado((Estado.EnEspera).ToString());
+            }
+        }
 
         public void MostrarEstadoOperadoresEnCiertaLocalizacion(int x, int y)
         {

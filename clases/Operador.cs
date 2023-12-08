@@ -38,9 +38,10 @@ namespace TP_Integrador
         public int getCoordX(){ return this.coordX; }
         public int getCoordY() { return this.coordY;}
         public int getVelocidadOptima() {  return velocidadOptima; }
-        public void setVelocidadOptima(int velocidadOptima) { this.velocidadOptima = velocidadOptima; }
         public bool getEstadoDañado() { return this.dañado; }
+        public void setVelocidadOptima(int velocidadOptima) { this.velocidadOptima = velocidadOptima; }
         public void setEstadoDañado(bool estadoDañado) { this.dañado=estadoDañado; }
+        public void setEstado(string Estado) { this.estado = Estado; }
         public void ComprobarBateriaActual()
         {
             Console.WriteLine("carga maxima: " + bateria.getCargaMaxima());
