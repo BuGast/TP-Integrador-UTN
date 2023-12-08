@@ -23,7 +23,6 @@ namespace TP_Integrador.clases
             TamanioMapaKm2 = tamanioMapaKm2;
         }
 
-
     }
 
 }
