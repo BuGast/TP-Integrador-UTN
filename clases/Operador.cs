@@ -112,61 +112,39 @@ namespace TP_Integrador
             if (xDestino >= 0 && xDestino <= mapa.getTamanioMapaKm2() && //me fijo que xDestino sea >=0 y que sea < que el valor máximo de la coord en X del mapa
                 yDestino >= 0 && yDestino <= mapa.getTamanioMapaKm2())
             {
+                int contadorBateria = 0;
                 while ((xActual != xDestino || yActual != yDestino)&& detener ==0 && Convert.ToInt32(bateria.getCargaActual) > 0 )
                 {
                     if (xActual < xDestino) //podría haberse movido de muchas formas, pero decidimos que esta sea por defecto
                     {
                         xActual++;
+                        contadorBateria++;
                         analizarSituacionDelOperador(xActual,yActual,mapa);
-                         // por cada movimiento la bateria disminuye en 1 mAh en situaciones normales
-                        if (simuladorDeDaños.BateriaPerforada == true)
-                        {
-                            this.bateria.setCargaActual(this.bateria.getCargaActual() - (1*500));
-                        }
-                        else
-                        {
-                            this.bateria.setCargaActual(this.bateria.getCargaActual() - 1);
-                        }
+                        DisminucionDeBateria();
+                        contadorBateria = ReduccionDeVelocidad(contadorBateria);
                     }
                     else if (xActual > xDestino)
                     {
                         xActual--;
+                        contadorBateria++;
                         analizarSituacionDelOperador(xActual,yActual, mapa);
-                        if (simuladorDeDaños.BateriaPerforada == true)
-                        {
-                            this.bateria.setCargaActual(this.bateria.getCargaActual() - (1 * 500));
-                        }
-                        else
-                        {
-                            this.bateria.setCargaActual(this.bateria.getCargaActual() - 1);
-                        }
+                        DisminucionDeBateria();
                     }
 
                     if (yActual < yDestino)
                     {
                         yActual++;
+                        contadorBateria++;
                         analizarSituacionDelOperador(xActual,yActual, mapa);
-                        if (simuladorDeDaños.BateriaPerforada == true)
-                        {
-                            this.bateria.setCargaActual(this.bateria.getCargaActual() - (1 * 500));
-                        }
-                        else
-                        {
-                            this.bateria.setCargaActual(this.bateria.getCargaActual() - 1);
-                        }
+                        DisminucionDeBateria();
                     }
                     else if (yActual > yDestino)
                     {
                         yActual--;
+                        contadorBateria++;
                         analizarSituacionDelOperador(xActual,yActual, mapa);
-                        if (simuladorDeDaños.BateriaPerforada == true)
-                        {
-                            this.bateria.setCargaActual(this.bateria.getCargaActual() - (1 * 500));
-                        }
-                        else
-                        {
-                            this.bateria.setCargaActual(this.bateria.getCargaActual() - 1);
-                        }
+                        DisminucionDeBateria();
+                        
                     }
                 }
                 // Actualizo la coordenada actual del operador
@@ -177,6 +155,30 @@ namespace TP_Integrador
             {
                 Console.WriteLine("La coordenada de destino no es válida");
             }
+        }
+
+        // por cada movimiento la bateria disminuye en 1 mAh en situaciones normales
+        public void DisminucionDeBateria()
+        {
+            if (simuladorDeDaños.BateriaPerforada == true)
+            {
+                this.bateria.setCargaActual(this.bateria.getCargaActual() - (1 * 500));
+            }
+            else
+            {
+                this.bateria.setCargaActual(this.bateria.getCargaActual() - 1);
+            }
+        }
+
+        public int ReduccionDeVelocidad(int contadorBateria)
+        {
+            int valor = this.bateria.getCargaMaxima() / 10;
+            if (contadorBateria == valor )
+            {
+                contadorBateria = 0;
+                velocidadOptima = Convert.ToInt32(velocidadOptima * 0.95);
+            }
+            return contadorBateria;
         }
 
         public int analizarSituacionDelOperador(int xActual, int yActual, Mapa mapa)
