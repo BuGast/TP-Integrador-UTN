@@ -20,6 +20,7 @@ namespace TP_Integrador
         int velocidadOptima;
         int coordX;
         int coordY;
+        bool dañado;
         SimuladorDeDaños simuladorDeDaños = new SimuladorDeDaños();
         public Operador(string id,int coordX, int coordY, int cargaBateria, int cargaFisica)
         {
@@ -38,6 +39,8 @@ namespace TP_Integrador
         public int getCoordY() { return this.coordY;}
         public int getVelocidadOptima() {  return velocidadOptima; }
         public void setVelocidadOptima(int velocidadOptima) { this.velocidadOptima = velocidadOptima; }
+        public bool getEstadoDañado() { return this.dañado; }
+        public void setEstadoDañado(bool estadoDañado) { this.dañado=estadoDañado; }
         public void ComprobarBateriaActual()
         {
             Console.WriteLine("carga maxima: " + bateria.getCargaMaxima());
@@ -133,11 +136,11 @@ namespace TP_Integrador
                     int probabilidadSimuladorDaño = randy.Next(0, 101);
                     if (probabilidadSimuladorDaño <= 20)
                     {
-                        simuladorDeDaños.SimularBateriaPerforada();
+                        simuladorDeDaños.SimularBateriaPerforada(this);
                     }
                     else if (probabilidadSimuladorDaño <= 40)
                     {
-                        simuladorDeDaños.SimularServoAtascado();
+                        simuladorDeDaños.SimularServoAtascado(this);
                     }
                     else if (probabilidadSimuladorDaño <= 60)
                     {
@@ -145,11 +148,11 @@ namespace TP_Integrador
                     }
                     else if (probabilidadSimuladorDaño <= 80)
                     {
-                        simuladorDeDaños.SimularPuertoBateriaDesconectado();
+                        simuladorDeDaños.SimularPuertoBateriaDesconectado(this);
                     }
                     else
                     {
-                        simuladorDeDaños.SimularPinturaRayada();
+                        simuladorDeDaños.SimularPinturaRayada(this);
                     }
                 }
             }
@@ -164,6 +167,21 @@ namespace TP_Integrador
             return detener;
         }
 
+        public void ResetearValoresOriginales()
+        {
+            int cargaFisica=this.cargaFisicaActual;
+            int cargaBateria=this.bateria.getCargaActual();
+            if (this.GetType().Name == "UAV") { cargaFisica = (int)CargaFisicaOperadores.UAV; cargaBateria = (int)BateriaOperadores.UAV; }
+            if (this.GetType().Name == "M8") { cargaFisica = (int)CargaFisicaOperadores.M8; cargaBateria = (int)BateriaOperadores.M8; }
+            if (this.GetType().Name == "K9") { cargaFisica = (int)CargaFisicaOperadores.K9; cargaBateria = (int)BateriaOperadores.K9; }
+
+
+            SimuladorDeDaños simuladorDeDaños = new SimuladorDeDaños();
+            this.bateria = new Bateria(cargaBateria, simuladorDeDaños);
+            this.estado = Estado.EnEspera.ToString();
+            this.cargaFisicaMaxima = cargaFisica;
+            this.velocidadOptima = 1;
+        }
         public void MostrarDetallesOperador()
         {
             Console.WriteLine(GetType().Name);

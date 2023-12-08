@@ -31,40 +31,45 @@ namespace TP_Integrador.clases
                 int velocidadReducida = Convert.ToInt32(operador.getVelocidadOptima()) / 2;
                 operador.setVelocidadOptima(velocidadReducida);
                 MotorComprometido = true;
+                operador.setEstadoDañado(MotorComprometido);
             }
         }
-        public void SimularServoAtascado()
+        public void SimularServoAtascado(Operador operador)
         {
             if (!ServoAtascado)
             {
                 Console.WriteLine("Servo atascado. No puede realizar operaciones de carga y descarga física.");
                 ServoAtascado = true;
+                operador.setEstadoDañado(ServoAtascado);
             }
         }
-        public void SimularBateriaPerforada()
+        public void SimularBateriaPerforada(Operador operador)
         {
             if (!BateriaPerforada)
             {
                 Console.WriteLine("Batería perforada. Pierde batería un 500% más rápido en cada operación.");
                 BateriaPerforada = true;
+                operador.setEstadoDañado(BateriaPerforada);
             }
         }
 
-        public void SimularPuertoBateriaDesconectado()
+        public void SimularPuertoBateriaDesconectado(Operador operador)
         {
             if (!PuertoBateriaDesconectado)
             {
                 Console.WriteLine("Puerto de batería desconectado. No puede realizar operaciones de carga, recarga o transferencia de batería.");
                 PuertoBateriaDesconectado = true;
+                operador.setEstadoDañado(PuertoBateriaDesconectado);
             }
         }
 
-        public void SimularPinturaRayada()
+        public void SimularPinturaRayada(Operador operador)
         {
             if (!PinturaRayada)
             {
                 Console.WriteLine("Pintura rayada. No tiene efecto.");
                 PinturaRayada = true;
+                operador.setEstadoDañado(PinturaRayada);
             }
         }
     }

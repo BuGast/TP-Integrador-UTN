@@ -92,6 +92,20 @@ namespace TP_Integrador.clases
                 }
             }
         }
+
+        public void EnviarOperadoresAMantenimiento(Mapa mapa)
+        {
+            foreach (var operador in operadores)
+            {
+                if (operador.getEstadoDañado())
+                {
+                    operador.Mover(this.coordX, this.coordY, mapa);
+                    operador.ResetearValoresOriginales();
+                }
+            }
+        }
+
+
         public void MostrarEstadoOperadoresEnCiertaLocalizacion(int x, int y)
         {
             foreach (var operador in operadores)
