@@ -15,6 +15,7 @@ namespace TP_Integrador.clases
     public class Mapa
     {
         List<Cuartel> listaDeCuarteles = new List<Cuartel>();
+        List<Operador> listaDeOperadores = new List<Operador>();
 
         private int TamanioMapaKm2 = 100;
         private int MaxCuarteles = 3;
@@ -38,8 +39,29 @@ namespace TP_Integrador.clases
         {
             this.terrenos = terrenos;
         }
+        public void setOperadores(List<Operador> operadores)
+        {
+            this.listaDeOperadores.Clear();
+            this.listaDeOperadores.AddRange(operadores);
+        }
+
         public int getTamanioMapaKm2() { return TamanioMapaKm2; }
         public List<TiposZonas> getTerrenosComunes() { return terrenosComunes; }
+
+
+
+
+        public void AgregarOperadorAlMapa()
+        {
+            foreach( var cuartel in listaDeCuarteles)
+            {
+                foreach (var op in cuartel.operadores)
+                {
+                    listaDeOperadores.Add(op);
+                }
+            }
+        }
+
         public Mapa()
         {
             terrenos = new TiposZonas[TamanioMapaKm2, TamanioMapaKm2];
@@ -156,7 +178,7 @@ namespace TP_Integrador.clases
         
         public string SerializarMapa()
         {
-            SerializacionMapa mapaEjemplo = new SerializacionMapa(TamanioMapaKm2, terrenos);
+            SerializacionMapa mapaEjemplo = new SerializacionMapa(TamanioMapaKm2, terrenos, listaDeOperadores);
             string jsonString = JsonSerializer.Serialize(mapaEjemplo);
             return jsonString;
         }

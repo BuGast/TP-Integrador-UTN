@@ -12,7 +12,7 @@ namespace TP_Integrador.clases
     public class Cuartel
     {
 
-        List<Operador> operadores = new List<Operador>();
+        public List<Operador> operadores = new List<Operador>();
 
         string id;
         int coordX;
@@ -114,8 +114,6 @@ namespace TP_Integrador.clases
                 Console.WriteLine("Id: " + operador.getId + ": " + operador.getEstado());
             }
         }
-
-
 
 
     }
