@@ -14,14 +14,14 @@ namespace TP_Integrador.clases
     [Serializable]
     public class Mapa
     {
+        private static Random random = new Random();
         List<Cuartel> listaDeCuarteles = new List<Cuartel>();
         List<Operador> listaDeOperadores = new List<Operador>();
 
         private int TamanioMapaKm2 = 100;
-        private int MaxCuarteles = 3;
+        private int MaxCuarteles = random.Next(1, 4);
         private TiposZonas[,] terrenos;
 
-        private Random random = new Random();
 
         // Decidimos que solo en estas localizaciones se puedan crear cuarteles
         private List<TiposZonas> terrenosComunes = new List<TiposZonas>
@@ -85,22 +85,22 @@ namespace TP_Integrador.clases
 
         private TiposZonas GenerarTerrenoAleatorio()
         {
+            int maximoSitioReciclaje = random.Next(1,6);
+            int contadorSitioReciclaje = 0;
             double probabilidad = random.NextDouble();
-
-            if (probabilidad < 0.1)
-                return TiposZonas.VertederoElectronico;
-            else if (probabilidad < 0.2)
-                return TiposZonas.SitioReciclaje;
-            else if (probabilidad < 0.3)
-                return TiposZonas.Lago;
-            else if (probabilidad < 0.4)
-                return TiposZonas.Bosque;
-            else if (probabilidad < 0.5)
-                return TiposZonas.SectorUrbano;
-            else if (probabilidad < 0.7)
-                return TiposZonas.Planicie;
-            else
-                return TiposZonas.TerrenoBaldio;
+            TiposZonas zona = TiposZonas.TerrenoBaldio;
+            if (probabilidad < 0.1) { zona = TiposZonas.VertederoElectronico; }
+            else if (probabilidad < 0.2 && contadorSitioReciclaje < maximoSitioReciclaje)
+            {
+                zona = TiposZonas.SitioReciclaje;
+                contadorSitioReciclaje++; 
+            }
+            else if (probabilidad < 0.3) { zona = TiposZonas.Lago; }
+            else if (probabilidad < 0.4) { zona = TiposZonas.Bosque; }
+            else if (probabilidad < 0.5) { zona = TiposZonas.SectorUrbano; }
+            else if (probabilidad < 0.7) { zona = TiposZonas.Planicie; }
+            else { zona = TiposZonas.TerrenoBaldio; }
+            return zona;
         }
         private void GenerarCuarteles()
         {
