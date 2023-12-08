@@ -230,14 +230,6 @@ namespace TP_Integrador
                 this.cargaFisicaActual = this.cargaFisicaMaxima;
             }
 
-
-            //posicion(x,y) = SeleccionarPocisionMasCercana(posiciones);
-            //Mover(x,y,mapa);
-            //this.cargaActual= this.cargaMaxima;
-            //var posiciones = mapa.BuscarZonaEnElMapa(TiposZonas.Reciclaje);
-            //posicion(x,y) = SeleccionarPocisionMasCercana(posiciones);
-            //Mover(x,y,mapa)
-            //this.cargaActual=0;
         }
         public (int,int) SeleccionarPosicionMasCercana(int opeCoordX, int opeCoordY, (int, int)[] posicionesEncontradas)
         {
@@ -247,7 +239,7 @@ namespace TP_Integrador
             {
                 int x = posicion.Item1;
                 int y = posicion.Item2;
-                int puntajeDeCercania = (x-opeCoordX) + (y-opeCoordY);
+                int puntajeDeCercania = Math.Abs(x-opeCoordX) + Math.Abs(y-opeCoordY);
                 if (puntajeDeCercania < puntajeMasCerca)
                 {
                     puntajeMasCerca = puntajeDeCercania;
@@ -257,8 +249,6 @@ namespace TP_Integrador
             }
             return posicionMasCercana;
         }
-        //implementar el método BuscarZonaEnElMapa(TiposZonas tipoZona)
-
 
         public void MostrarDetallesOperador()
         {
