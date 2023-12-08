@@ -16,12 +16,11 @@ namespace TP_Integrador.clases
     {
         List<Cuartel> listaDeCuarteles = new List<Cuartel>();
 
-        private const int TamanioMapaKm2 = 100;
-        private const int MaxCuarteles = 3;
-
+        private int TamanioMapaKm2 = 100;
+        private int MaxCuarteles = 3;
         private TiposZonas[,] terrenos;
-        private Random random;
 
+        private Random random = new Random();
 
         // Decidimos que solo en estas localizaciones se puedan crear cuarteles
         private List<TiposZonas> terrenosComunes = new List<TiposZonas>
@@ -31,6 +30,14 @@ namespace TP_Integrador.clases
             TiposZonas.Bosque,
             TiposZonas.SectorUrbano
         };
+        public void setTamanioMapaKm2(int tamanioMapa)
+        {
+            this.TamanioMapaKm2 = tamanioMapa;
+        }
+        public void setTerrenos(TiposZonas[,] terrenos)
+        {
+            this.terrenos = terrenos;
+        }
         public int getTamanioMapaKm2() { return TamanioMapaKm2; }
         public List<TiposZonas> getTerrenosComunes() { return terrenosComunes; }
         public Mapa()
@@ -149,9 +156,14 @@ namespace TP_Integrador.clases
         
         public string SerializarMapa()
         {
-            SerializacionMapa mapaEjemplo = new SerializacionMapa(TamanioMapaKm2);
+            SerializacionMapa mapaEjemplo = new SerializacionMapa(TamanioMapaKm2, terrenos);
             string jsonString = JsonSerializer.Serialize(mapaEjemplo);
             return jsonString;
+        }
+        public static Mapa DeserializarDesdeJson(string jsonString)
+        {
+            SerializacionMapa mapaSerializado = JsonSerializer.Deserialize<SerializacionMapa>(jsonString);
+            return mapaSerializado?.DeserializarMapa();
         }
 
 

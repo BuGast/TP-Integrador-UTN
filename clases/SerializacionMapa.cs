@@ -16,11 +16,21 @@ namespace TP_Integrador.clases
         [JsonPropertyName("TamanioMapaKm2")]
         public int TamanioMapaKm2 { get; set; }
 
+        [JsonPropertyName("Terrenos")]
+        public TiposZonas[,] Terrenos { get; set; }
 
         [JsonConstructor]
-        public SerializacionMapa(int tamanioMapaKm2)
+        public SerializacionMapa(int tamanioMapaKm2, TiposZonas[,] terrenos)
         {
             TamanioMapaKm2 = tamanioMapaKm2;
+            Terrenos = terrenos;
+        }
+        public Mapa DeserializarMapa()
+        {
+            Mapa mapa = new Mapa();
+            mapa.setTamanioMapaKm2(TamanioMapaKm2);
+            mapa.setTerrenos(Terrenos);
+            return mapa;
         }
 
     }
