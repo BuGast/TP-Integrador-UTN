@@ -125,11 +125,32 @@ namespace TP_Integrador
             {
                 detener=1;
             }
+            int probabilidadDaño = randy.Next(0, 101);
             else if (terrenoActual == TiposZonas.Vertedero)
             {
-                int probabilidad = randy.Next(0, 101);
-                if (probabilidad <= 5)
-                { 
+                if (probabilidadDaño <= 5)
+                {
+                    int probabilidadSimuladorDaño = randy.Next(0, 101);
+                    if (probabilidadSimuladorDaño <= 20)
+                    {
+                        simuladorDeDaños.SimularBateriaPerforada();
+                    }
+                    else if (probabilidadSimuladorDaño <= 40)
+                    {
+                        simuladorDeDaños.SimularServoAtascado();
+                    }
+                    else if (probabilidadSimuladorDaño <= 60)
+                    {
+                        simuladorDeDaños.SimularMotorComprometido(this);
+                    }
+                    else if (probabilidadSimuladorDaño <= 80)
+                    {
+                        simuladorDeDaños.SimularPuertoBateriaDesconectado();
+                    }
+                    else
+                    {
+                        simuladorDeDaños.SimularPinturaRayada();
+                    }
                 }
             }
             else if (terrenoActual == TiposZonas.VertederoElectronico)
