@@ -86,22 +86,55 @@ namespace TP_Integrador
                     {
                         xActual++;
                         analizarSituacionDelOperador(xActual,yActual,mapa);
+                         // por cada movimiento la bateria disminuye en 1 mAh en situaciones normales
+                        if (simuladorDeDaños.BateriaPerforada == true)
+                        {
+                            this.bateria.setCargaActual(this.bateria.getCargaActual() - (1*500));
+                        }
+                        else
+                        {
+                            this.bateria.setCargaActual(this.bateria.getCargaActual() - 1);
+                        }
                     }
                     else if (xActual > xDestino)
                     {
                         xActual--;
                         analizarSituacionDelOperador(xActual,yActual, mapa);
+                        if (simuladorDeDaños.BateriaPerforada == true)
+                        {
+                            this.bateria.setCargaActual(this.bateria.getCargaActual() - (1 * 500));
+                        }
+                        else
+                        {
+                            this.bateria.setCargaActual(this.bateria.getCargaActual() - 1);
+                        }
                     }
 
                     if (yActual < yDestino)
                     {
                         yActual++;
                         analizarSituacionDelOperador(xActual,yActual, mapa);
+                        if (simuladorDeDaños.BateriaPerforada == true)
+                        {
+                            this.bateria.setCargaActual(this.bateria.getCargaActual() - (1 * 500));
+                        }
+                        else
+                        {
+                            this.bateria.setCargaActual(this.bateria.getCargaActual() - 1);
+                        }
                     }
                     else if (yActual > yDestino)
                     {
                         yActual--;
                         analizarSituacionDelOperador(xActual,yActual, mapa);
+                        if (simuladorDeDaños.BateriaPerforada == true)
+                        {
+                            this.bateria.setCargaActual(this.bateria.getCargaActual() - (1 * 500));
+                        }
+                        else
+                        {
+                            this.bateria.setCargaActual(this.bateria.getCargaActual() - 1);
+                        }
                     }
                 }
                 // Actualizo la coordenada actual del operador
