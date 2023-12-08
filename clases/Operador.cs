@@ -73,6 +73,33 @@ namespace TP_Integrador
             return operadorCerca;
         }
 
+        public void TransferirBateriaDesdeOtroOperador(Operador operador2)
+        {
+            bool operadorCerca = VerificarProximidadConOperador(operador2);
+            if (operadorCerca == true && operador2.estado == Estado.EnEspera.ToString())
+            {
+                bool cargaValida;
+                int carga = 0;
+                do
+                {
+                    Console.WriteLine("Cuánta carga desea suministrar al operador?");
+                    carga = Convert.ToInt32(Console.ReadLine());
+                    cargaValida = ValidarCargaSinExceso(carga, operador2.bateria);
+                }
+                while (!cargaValida);
+                
+                this.bateria.CargaYDescargaBateria(carga,operador2.bateria );
+            }
+        }
+        public bool ValidarCargaSinExceso(int carga, Bateria bateria)
+        {
+            bool cargaValida = false;
+            if ( carga< Convert.ToInt32(bateria.getCargaActual) )
+            {
+                cargaValida= true;
+            }
+            return cargaValida;
+        }
 
         public void Mover(int x, int y, Mapa mapa)
         {
