@@ -1,13 +1,17 @@
 ﻿// Gastón Camú, Alicia Nazar
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace TP_Integrador.clases
 {
+    [Serializable]
     public class Mapa
     {
         List<Cuartel> listaDeCuarteles = new List<Cuartel>();
@@ -138,6 +142,17 @@ namespace TP_Integrador.clases
             return posiciones;
         }
 
+
+
+
+
+        
+        public string SerializarMapa()
+        {
+            SerializacionMapa mapaEjemplo = new SerializacionMapa(TamanioMapaKm2);
+            string jsonString = JsonSerializer.Serialize(mapaEjemplo);
+            return jsonString;
+        }
 
 
 
