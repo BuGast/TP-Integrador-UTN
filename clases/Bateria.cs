@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TP_Integrador.clases;
 
 namespace TP_Integrador
 {
@@ -13,34 +14,34 @@ namespace TP_Integrador
 
         private int cargaMaxima;
         private int cargaActual;
+        private bool dañoBateria;
 
-        public Bateria(int cargaMaxima)
+        public Bateria(int cargaMaxima, SimuladorDeDaños simuladorDeDaños)
         {
             this.cargaMaxima = cargaMaxima;
             this.cargaActual = this.cargaMaxima;
+            this.dañoBateria = simuladorDeDaños.BateriaPerforada;
         }
 
-/*        public void CargarCargaMaxima(int cargaM)
-        {
-            this.cargaMaxima = cargaM;
-            this.cargaActual = cargaMaxima;
-        }*/
         public void CargaYDescargaBateria(int carga, Bateria bateria2)
         {
-            if (carga > 0 && carga<= bateria2.cargaActual)
+            if( dañoBateria == false)
             {
-                if ((carga + this.cargaActual) <= this.cargaMaxima)
+                if (carga > 0 && carga <= bateria2.cargaActual)
                 {
-                    this.cargaActual += carga;
-                    bateria2.cargaActual -= carga;   
+                    if ((carga + this.cargaActual) <= this.cargaMaxima)
+                    {
+                        this.cargaActual += carga;
+                        bateria2.cargaActual -= carga;
+                    }
+                    else
+                    {
+                        bateria2.cargaActual -= this.cargaActual - this.cargaMaxima;
+                        this.cargaActual = this.cargaMaxima;
+                    }
                 }
-                else
-                {
-                    bateria2.cargaActual -= this.cargaActual - this.cargaMaxima;
-                    this.cargaActual = this.cargaMaxima;
-                }
+                Console.WriteLine("Se actualizaron los valores de las baterías");
             }
-            Console.WriteLine("Se actualizaron los valores de las baterías");
         }
 
         public int getCargaMaxima()

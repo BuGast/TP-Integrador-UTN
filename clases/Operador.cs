@@ -20,17 +20,18 @@ namespace TP_Integrador
         int velocidadOptima;
         int coordX;
         int coordY;
-
+        SimuladorDeDaños simuladorDeDaños = new SimuladorDeDaños();
         public Operador(string id,int coordX, int coordY, int cargaBateria, int cargaFisica)
         {
             this.id = id;
-            this.bateria = new Bateria(cargaBateria);
+            this.bateria = new Bateria(cargaBateria, simuladorDeDaños);
             this.estado = Estado.EnEspera.ToString();
             this.cargaFisicaMaxima = cargaFisica;
             this.velocidadOptima = 1;
             this.coordX = coordX;
             this.coordY = coordY;
         }
+        
         public string getEstado(){ return estado; }
         public string getId(){ return id; }
         public int getCoordX(){ return this.coordX; }
@@ -45,14 +46,17 @@ namespace TP_Integrador
 
         public void TransferirCargaFisica(Operador operador2, int carga)
         {
-            if (operador2.cargaFisicaMaxima >= this.cargaFisicaMaxima) 
+            if (simuladorDeDaños.ServoAtascado == false)
             {
-                operador2.cargaFisicaActual = this.cargaFisicaActual;
-                this.cargaFisicaActual = 0;
-            }
-            else
-            {
-                Console.WriteLine("error el operador no puede levantar la carga");
+                if (operador2.cargaFisicaMaxima >= this.cargaFisicaMaxima)
+                {
+                    operador2.cargaFisicaActual = this.cargaFisicaActual;
+                    this.cargaFisicaActual = 0;
+                }
+                else
+                {
+                    Console.WriteLine("error el operador no puede levantar la carga");
+                }
             }
         }
 
