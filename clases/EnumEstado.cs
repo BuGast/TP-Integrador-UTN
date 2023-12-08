@@ -10,7 +10,7 @@ namespace TP_Integrador
 {
     internal enum Estado
     {
-        Disponible,
-        EnEspera
+        NoDisponible,
+        EnEspera //listo para cualquier acción
     }
 }
