@@ -13,8 +13,8 @@ namespace TP_Integrador
     {
         static void Main(string[] args)
         {
-            // Mapa miMapa = new Mapa();
-            // miMapa.MostrarMapa();
+            Mapa miMapa = new Mapa();
+            miMapa.MostrarMapa();
         }
     }
 }

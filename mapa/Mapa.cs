@@ -79,19 +79,21 @@ namespace TP_Integrador
 
         private void GenerarMapa()
         {
+            int contadorSitioReciclaje = 0;
             for (int x = 0; x < TamanioMapaKm2; x++)
             {
                 for (int y = 0; y < TamanioMapaKm2; y++)
                 {
-                    terrenos[x, y] = GenerarTerrenoAleatorio();
+                    terrenos[x, y] = GenerarTerrenoAleatorio(ref contadorSitioReciclaje);
+                    //if (terrenos[x,y] == TiposZonas.SitioReciclaje) { contadorSitioReciclaje++}
                 }
             }
         }
 
-        private TiposZonas GenerarTerrenoAleatorio()
+        private TiposZonas GenerarTerrenoAleatorio(ref int contadorSitioReciclaje)
         {
             int maximoSitioReciclaje = random.Next(1, 6);
-            int contadorSitioReciclaje = 0;
+            //int contadorSitioReciclaje = 0;
             double probabilidad = random.NextDouble();
             TiposZonas zona = TiposZonas.TerrenoBaldio;
             if (probabilidad < 0.1) { zona = TiposZonas.VertederoElectronico; }
