@@ -35,6 +35,16 @@ namespace TP_Integrador
         private int MaxCuarteles = random.Next(1, 4);
         private TiposZonas[,] terrenos;
 
+        // Pensamos en hacer que mapa sea un singleton para asegurarnos que no se creen más instancias 
+        private static Mapa _instancia;
+        public static Mapa Instancia()
+        {
+            if (_instancia == null)
+            {
+                _instancia = new Mapa();
+            }
+            return _instancia;
+        }
 
         // Decidimos que solo en estas localizaciones se puedan crear cuarteles
         private List<TiposZonas> terrenosComunes = new List<TiposZonas>
@@ -85,7 +95,6 @@ namespace TP_Integrador
                 for (int y = 0; y < TamanioMapaKm2; y++)
                 {
                     terrenos[x, y] = GenerarTerrenoAleatorio(ref contadorSitioReciclaje);
-                    //if (terrenos[x,y] == TiposZonas.SitioReciclaje) { contadorSitioReciclaje++}
                 }
             }
         }
