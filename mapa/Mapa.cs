@@ -1,5 +1,17 @@
 ﻿// Gastón Camú, Alicia Nazar
 
+/* Introduccion
+ * En este apartado realizamos lo siguiente:
+ * Creacion de la clase mapa
+ * Metodo para agregar los operadores de cada respectivo cuartel en el mapa.
+ * Metodo para generar mapa.
+ * Metodo para mostrar mapa.
+ * Metodo para obtener el simbolo de cada terreno.
+ * Metodo para buscar una zona en el mapa y retorna dicha o dichas ubicaciones.
+ * Metodo para serializar el mapa.
+ * Metodo para deserializar el mapa.
+*/
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,11 +20,9 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using TP_Integrador.clases;
-using TP_Integrador.enums;
-using TP_Integrador.operador;
+using TP_Integrador;
 
-namespace TP_Integrador.mapa
+namespace TP_Integrador
 {
     [Serializable]
     public class Mapa
@@ -34,14 +44,8 @@ namespace TP_Integrador.mapa
             TiposZonas.Bosque,
             TiposZonas.SectorUrbano
         };
-        public void setTamanioMapaKm2(int tamanioMapa)
-        {
-            TamanioMapaKm2 = tamanioMapa;
-        }
-        public void setTerrenos(TiposZonas[,] terrenos)
-        {
-            this.terrenos = terrenos;
-        }
+        public void setTamanioMapaKm2(int tamanioMapa) { TamanioMapaKm2 = tamanioMapa; }
+        public void setTerrenos(TiposZonas[,] terrenos) { this.terrenos = terrenos; }
         public void setOperadores(List<Operador> operadores)
         {
             listaDeOperadores.Clear();
@@ -50,8 +54,7 @@ namespace TP_Integrador.mapa
 
         public int getTamanioMapaKm2() { return TamanioMapaKm2; }
         public List<TiposZonas> getTerrenosComunes() { return terrenosComunes; }
-
-
+        public TiposZonas[,] getTerrenos() { return terrenos; }
 
 
         public void AgregarOperadorAlMapa()
@@ -74,7 +77,6 @@ namespace TP_Integrador.mapa
             GenerarCuarteles();
         }
 
-        public TiposZonas[,] getTerrenos() { return terrenos; }
         private void GenerarMapa()
         {
             for (int x = 0; x < TamanioMapaKm2; x++)
@@ -173,10 +175,6 @@ namespace TP_Integrador.mapa
 
             return posiciones;
         }
-
-
-
-
 
 
         public string SerializarMapa()

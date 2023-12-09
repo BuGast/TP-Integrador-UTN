@@ -4,7 +4,7 @@
  * En este apartado realizamos lo siguiente:
  
  * Creacion de la clase SimuladorDeDaños:
- * Este se realizo para aplicar el daño correspondiente de cada terreno al operador.
+    * Este se realizo para aplicar el daño correspondiente de cada terreno al operador.
 
  * Metodo SimularMotorComprometido.
  * Metodo SimularServoAtascado.

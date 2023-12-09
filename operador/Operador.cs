@@ -1,15 +1,32 @@
 ﻿// Gastón Camú, Alicia Nazar
 
+/* Introduccion
+ * En este apartado realizamos lo siguiente:
+ * Creacion de la clase abstracta operador.
+ * Metodo para mostrar la bateria actual.
+ * Metodo para transferir la carga fisica.
+ * Metodo para verificar proximidad con un operador.
+ * Metodo para transferir la bateria desde otro operador.
+ * Metodo para validar la carga de la bateria sin exceso.
+ * Metodo para mover al operador.
+ * Metodo que sirve para disminuir la bateria del operador (usado por el metodo mover para restar conforme avanza).
+ * Metodo para reducir la velocidad del operador.
+ * Metodo que analiza cada vez que se mueve el operador su situacion.
+ * Metodo que sirve para resetear los valores del operador a fabrica.
+ * Metodo que permite remplazar la bateria.
+ * Metodo que permite recoger cargas en el vertedero.
+ * Metodo que trae la posicion del vertedero mas cercano al operador.
+ * Metodo que muestra los detalles de un operador.
+*/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TP_Integrador.enums;
-using TP_Integrador.mapa;
-using TP_Integrador.simulador_daño;
+using TP_Integrador;
 
-namespace TP_Integrador.operador
+namespace TP_Integrador
 {
     public abstract class Operador
     {
@@ -44,12 +61,12 @@ namespace TP_Integrador.operador
         public void setVelocidadOptima(int velocidadOptima) { this.velocidadOptima = velocidadOptima; }
         public void setEstadoDañado(bool estadoDañado) { dañado = estadoDañado; }
         public void setEstado(string Estado) { estado = Estado; }
-        public void ComprobarBateriaActual()
+
+        public void MostrarBateriaActual()
         {
             Console.WriteLine("carga maxima: " + bateria.getCargaMaxima());
             Console.WriteLine("carga actual: " + bateria.getCargaActual());
         }
-
         public void TransferirCargaFisica(Operador operador2, int carga)
         {
             if (simuladorDeDaños.ServoAtascado == false)
@@ -65,7 +82,6 @@ namespace TP_Integrador.operador
                 }
             }
         }
-
         public bool VerificarProximidadConOperador(Operador operador2)
         {
             bool operadorCerca = false;
@@ -75,7 +91,6 @@ namespace TP_Integrador.operador
             }
             return operadorCerca;
         }
-
         public void TransferirBateriaDesdeOtroOperador(Operador operador2)
         {
             bool operadorCerca = VerificarProximidadConOperador(operador2);
@@ -103,7 +118,6 @@ namespace TP_Integrador.operador
             }
             return cargaValida;
         }
-
         public void Mover(int x, int y, Mapa mapa)
         {
             int xActual = coordX; // Obtener la posición actual del operador
@@ -172,7 +186,6 @@ namespace TP_Integrador.operador
                 bateria.setCargaActual(bateria.getCargaActual() - 1);
             }
         }
-
         public int ReduccionDeVelocidad(int contadorBateria)
         {
             int valor = bateria.getCargaMaxima() / 10;
@@ -183,7 +196,6 @@ namespace TP_Integrador.operador
             }
             return contadorBateria;
         }
-
         public int analizarSituacionDelOperador(int xActual, int yActual, Mapa mapa)
         {
             Random randy = new Random();
@@ -230,7 +242,6 @@ namespace TP_Integrador.operador
             }
             return detener;
         }
-
         public void ResetearValoresOriginales()
         {
             int cargaFisica = cargaFisicaActual;
@@ -252,8 +263,6 @@ namespace TP_Integrador.operador
             else if (GetType().Name == "M8") { bateria = new Bateria((int)BateriaOperadores.M8, simuladorDeDaños); }
             else { bateria = new Bateria((int)BateriaOperadores.K9, simuladorDeDaños); }
         }
-
-
         public void RecogerCargaEnVertedero(Mapa mapa)
         {
             (int, int)[] posicionesEncontradas = mapa.BuscarZonaEnElMapa(TiposZonas.Vertedero);
@@ -283,7 +292,6 @@ namespace TP_Integrador.operador
             }
             return posicionMasCercana;
         }
-
         public void MostrarDetallesOperador()
         {
             Console.WriteLine(GetType().Name);

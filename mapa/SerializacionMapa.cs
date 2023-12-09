@@ -1,4 +1,13 @@
-﻿using System;
+﻿// Gastón Camú, Alicia Nazar
+
+/* Introduccion
+ * En este apartado realizamos lo siguiente:
+ * Creacion de la clase SerializacionMapa:
+    * Esta clase la utilizamos para serializar y deserializar el mapa.
+    * 
+*/
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
@@ -7,10 +16,9 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using TP_Integrador.enums;
-using TP_Integrador.operador;
+using TP_Integrador;
 
-namespace TP_Integrador.mapa
+namespace TP_Integrador
 {
     [Serializable]
     public class SerializacionMapa

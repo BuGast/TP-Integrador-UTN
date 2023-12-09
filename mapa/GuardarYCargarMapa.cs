@@ -1,11 +1,21 @@
-﻿using System;
+﻿// Gastón Camú, Alicia Nazar
+
+/* Introduccion
+ * En este apartado realizamos lo siguiente:
+ * Creacion de la clase GuardarYCargarMapa:
+     * Esta clase es fundamental para el manejo de carpetas y archivos del proceso de serializacion del mapa.
+     * Es la encargada de crear los directorios y asignar los archivos.
+     * Tambien se encarga del manejo de algunas excepciones a la hora de trabajar directorios.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace TP_Integrador.mapa
+namespace TP_Integrador
 {
     public class GuardarYCargarMapa
     {

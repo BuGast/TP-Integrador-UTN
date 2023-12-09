@@ -1,13 +1,19 @@
 ﻿// Gastón Camú, Alicia Nazar
 
+/* Introduccion
+ * En este apartado realizamos lo siguiente:
+ * Creacion de la clase bateria.
+ * Metodo para cargar y descargar (usado para transferir bateria)
+*/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TP_Integrador.simulador_daño;
+using TP_Integrador;
 
-namespace TP_Integrador.operador
+namespace TP_Integrador
 {
     public class Bateria
     {
@@ -44,22 +50,10 @@ namespace TP_Integrador.operador
             }
         }
 
-        public int getCargaMaxima()
-        {
-            return cargaMaxima;
-        }
-        public int getCargaActual()
-        {
-            return cargaActual;
-        }
-        public void setCargaMaxima(int cargaMaxima)
-        {
-            this.cargaMaxima = cargaMaxima;
-        }
-        public void setCargaActual(int cargaActual)
-        {
-            this.cargaActual = cargaActual;
-        }
+        public int getCargaMaxima() { return cargaMaxima; }
+        public int getCargaActual() { return cargaActual; }
+        public void setCargaMaxima(int cargaMaxima) { this.cargaMaxima = cargaMaxima; }
+        public void setCargaActual(int cargaActual) { this.cargaActual = cargaActual; }
 
 
     }
