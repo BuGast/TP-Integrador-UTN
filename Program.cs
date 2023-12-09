@@ -14,7 +14,7 @@ namespace TP_Integrador
         static void Main(string[] args)
         {
             Mapa miMapa = new Mapa();
-            miMapa.MostrarMapa();
+            miMapa.MostrarMapa(); // el mapa se ve mejor en pantalla completa y le pusimos colores para diferenciar zonas
         }
     }
 }
