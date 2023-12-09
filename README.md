@@ -1,2 +1,1 @@
-# TP-Integrador
-# Funcionando?
+Este sistema es para Sky.Net Realizado por Gastón Camu y Alicia Nazar
