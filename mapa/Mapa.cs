@@ -136,18 +136,62 @@ namespace TP_Integrador
             }
         }
 
+
+
+
         public void MostrarMapa()
         {
             for (int x = 0; x < TamanioMapaKm2; x++)
             {
                 for (int y = 0; y < TamanioMapaKm2; y++)
                 {
-                    Console.Write(ObtenerSimboloTerreno(terrenos[x, y]) + " ");
+                    Console.BackgroundColor = ObtenerColorFondo(terrenos[x, y]);
+                    Console.ForegroundColor = ObtenerColorCaracter(terrenos[x, y]);
+
+                    Console.Write(ObtenerSimboloTerreno(terrenos[x, y]));
+                    Console.ResetColor();
                 }
                 Console.WriteLine();
             }
         }
 
+        private ConsoleColor ObtenerColorFondo(TiposZonas terreno)
+        {
+            switch (terreno)
+            {
+                case TiposZonas.TerrenoBaldio:
+                    return ConsoleColor.DarkGray;
+                case TiposZonas.Planicie:
+                    return ConsoleColor.DarkGreen;
+                case TiposZonas.Bosque:
+                    return ConsoleColor.Green;
+                case TiposZonas.SectorUrbano:
+                    return ConsoleColor.Gray;
+                case TiposZonas.Vertedero:
+                    return ConsoleColor.DarkYellow;
+                case TiposZonas.Lago:
+                    return ConsoleColor.Blue;
+                case TiposZonas.VertederoElectronico:
+                    return ConsoleColor.Yellow;
+                case TiposZonas.SitioReciclaje:
+                    return ConsoleColor.Magenta;
+                case TiposZonas.Cuartel:
+                    return ConsoleColor.DarkRed;
+                default:
+                    return ConsoleColor.Black;
+            }
+        }
+        private ConsoleColor ObtenerColorCaracter(TiposZonas terreno)
+        {
+            switch (terreno)
+            {
+                case TiposZonas.Lago:
+                case TiposZonas.Cuartel:
+                    return ConsoleColor.White;
+                default:
+                    return ConsoleColor.Black;
+            }
+        }
         private char ObtenerSimboloTerreno(TiposZonas terreno)
         {
             switch (terreno)
@@ -174,7 +218,6 @@ namespace TP_Integrador
                     return ' ';
             }
         }
-
         public (int, int)[] BuscarZonaEnElMapa(TiposZonas zonaBuscada)
         {
             int filas = terrenos.GetLength(0);
