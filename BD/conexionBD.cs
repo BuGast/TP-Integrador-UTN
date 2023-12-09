@@ -1,4 +1,11 @@
-﻿using System;
+﻿// Gastón Camú, Alicia Nazar
+
+/* Introduccion
+ * En este apartado intentamos generar una clase que nos permita reutilizar la parte de la conexion..
+ * y otras funciones como la ejecucion de las consultas.
+*/
+
+using System;
 using System.Data;
 using System.Data.SqlClient;
 

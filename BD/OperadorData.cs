@@ -1,4 +1,11 @@
-﻿using System;
+﻿// Gastón Camú, Alicia Nazar
+
+/* Introduccion
+ * Este clase la creamos para manejar el crud de operador.
+ * Lo estabamos implementando pero se nos fue el tiempo volando asi que quedo casi terminado :)
+*/
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
