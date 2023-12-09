@@ -1,11 +1,26 @@
-﻿using System;
+﻿// Gastón Camú, Alicia Nazar
+
+/* Introduccion
+ * En este apartado realizamos lo siguiente:
+ 
+ * Creacion de la clase SimuladorDeDaños:
+ * Este se realizo para aplicar el daño correspondiente de cada terreno al operador.
+
+ * Metodo SimularMotorComprometido.
+ * Metodo SimularServoAtascado.
+ * Metodo SimularBateriaPerforada.
+ * Metodo SimularPuertoBateriaDesconectado.
+ * Metodo SimularPinturaRayada.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TP_Integrador.operador;
+using TP_Integrador;
 
-namespace TP_Integrador.simulador_daño
+namespace TP_Integrador
 {
     public class SimuladorDeDaños
     {

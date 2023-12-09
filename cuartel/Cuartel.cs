@@ -1,15 +1,26 @@
 // Gastón Camú, Alicia Nazar
 
+/* Introduccion
+ * En este apartado realizamos lo siguiente:
+
+ * Creacion de la clase cuartel.
+ * Creacion del operador permitiendo al usuario que decida cuantos y de que tipo de operador desea crear.
+ * Metodo para mostrar los detalles de los atributos que contiene cada uno de los operadores.
+ * Metodo para mostrar el estado de cada uno de los operadores.
+ * Metodo TotalRecall.
+ * Metodo para enviar a los operadores a mantenimiento.
+ * Metodo para cambiar el estado de todos los operadores a STANDBY.
+ * Metodo para mostrar el estado de los operadores en cierta localizacion.
+*/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TP_Integrador.enums;
-using TP_Integrador.mapa;
-using TP_Integrador.operador;
+using TP_Integrador;
 
-namespace TP_Integrador.clases
+namespace TP_Integrador
 {
     public class Cuartel
     {
@@ -30,7 +41,7 @@ namespace TP_Integrador.clases
 
         public void CrearOperador()
         {
-
+            // Esto va implementado en un menu que no hicimos, esto fue creado a manera de testeo.
             Console.WriteLine("¿Que tipo de operador quiere crear?");
             Console.WriteLine("1: para UAV");
             Console.WriteLine("2: para K9");
@@ -62,10 +73,6 @@ namespace TP_Integrador.clases
                 }
                 operadores.Add(operador);
             }
-/*            foreach (var operador in operadores)
-            {
-                MostrarDetallesOperador(operador);
-            }*/
         }
 
         public void MostrarDetallesOperadoresCreados()
