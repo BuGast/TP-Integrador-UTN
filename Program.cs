@@ -1,2 +1,20 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿// Gastón Camú, Alicia Nazar
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TP_Integrador;
+
+namespace TP_Integrador
+{
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            Mapa miMapa = new Mapa();
+            miMapa.MostrarMapa(); // el mapa se ve mejor en pantalla completa y le pusimos colores para diferenciar zonas
+        }
+    }
+}
